@@ -1,0 +1,106 @@
+.menu{
+    margin: 0px;
+    padding: 0px;
+    background-color: #323d4e;
+}
+
+.menu-left{
+    margin: 0px;
+    padding: 0px;
+}
+
+.menu-left img{
+    height: 695px;
+}
+
+@media screen and (max-width: 1024px){
+    .menu-left img{
+        height: auto;
+    }
+}
+
+a{
+  color: #1985e2;
+}
+.titre-connexion{
+    color:white;
+    text-align: center;
+}
+
+
+.form-control{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 1px;
+    box-shadow: none;
+
+}
+.submit_h{
+
+color: #fff;
+background-color:#0067b8;
+
+}
+.input-mail{
+    background-color: #323d4e;
+    color: white;
+    font-size: 15px;
+    padding: 0px;
+}
+
+.input{
+    margin-bottom: 25px;
+}
+
+.logo{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.logo img{
+    border-radius: 100%;
+}
+
+.login{
+    padding: 20px;
+}
+
+.login-logo{
+    display: block;
+}
+@media screen and (max-width: 800px){
+    .logo{
+        margin-top: 25px;
+    }
+    .login-logo{
+        margin-top: -153px;
+    }
+}
+
+.or-box
+{
+    position: relative;
+    border-top: 1px solid #dfdfdf;
+    padding-top: 20px;
+    margin-top:20px;
+}
+.or
+{
+    color: #ffffff;
+    background-color: #323d4e;
+    position: absolute;
+    text-align: center;
+    top: -12px;
+    width: 40px;
+    left: 45%;
+}
+
+.register{
+    text-align: center;
+}
+
+.register span{
+    color:white;
+}
