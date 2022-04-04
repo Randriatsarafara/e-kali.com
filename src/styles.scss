@@ -1,1 +1,91 @@
-/* You can add global styles to this file, and also import other style files */
+@use '~@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@include mat.core();
+// hue. Available color palettes: https://material.io/design/color/
+$lieb-primary: mat.define-palette(mat.$green-palette, 700, A400, A700);
+$lieb-accent: mat.define-palette(mat.$deep-orange-palette, 500, 400, A700);
+$lieb-warn: mat.define-palette(mat.$yellow-palette, 700, 500, A700);
+
+$lieb-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $lieb-primary,
+      accent: $lieb-accent,
+      warn: $lieb-warn
+    )
+  )
+);
+
+@include mat.all-component-themes($lieb-theme);
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+html {
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 3.2rem;
+  font-weight: 700;
+}
+h2 {
+  font-size: 2rem;
+  line-height: 3rem;
+  font-weight: 700;
+}
+h3 {
+  font-size: 1.75rem;
+  line-height: 3rem;
+  font-weight: 600;
+}
+h4 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+h5 {
+  font-size: 1.25rem;
+  line-height: 1.9rem;
+  font-weight: 600;
+}
+h6 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #787878;
+}
+button {
+  &:focus {
+    outline: none;
+  }
+}
+svg {
+  display: inline-block;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: 'Poppins', 'Helvetica Neue', sans-serif;
+}

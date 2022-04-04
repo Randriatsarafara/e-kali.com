@@ -1,0 +1,48 @@
+$iconSize: 28px;
+$buttonSize: 28px;
+
+.header {
+  padding: 15px 0;
+}
+.top-fixed {
+  position:fixed;
+  width: 100%;
+  top: 0;
+  padding: 15px 0;
+  z-index: 9999;
+  background-color: #ffffff;
+  transition: background-color 0.5s ease;
+}
+.logo {
+  max-width: 200px;
+  font-family: cursive;;
+}
+.sidenavtoggler {
+  height: $buttonSize;
+  width: $buttonSize;
+}
+
+.mat-icon {
+  font-size: $iconSize;
+  height: $iconSize;
+  width: $iconSize;
+  line-height: $iconSize;
+}
+
+@media (min-width: 768px) {
+  $iconSize: 28px;
+  $buttonSize: 28px;
+  .logo {
+    max-width: 200px;
+  }
+  .sidenavtoggler {
+    height: $buttonSize;
+    width: $buttonSize;
+  }
+  .mat-icon {
+    font-size: $iconSize;
+    height: $iconSize;
+    width: $iconSize;
+    line-height: $iconSize;
+  }
+}

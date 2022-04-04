@@ -1,0 +1,32 @@
+<header class="header top-fixed bg-gray-50 shadow">
+  <div class="container">
+    <div class="flex items-center">
+      <div class="flex items-center">
+        <a class="logo" [routerLink]="['']">
+          <h1>E-KALI</h1>
+        </a>
+        <ul class="flex item-center ml-5" *ngIf="!isLessThenLargeDevice">
+          <li>
+            <a mat-button routerLink="/" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Plats</a>
+            <a mat-button routerLink="/commandes" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Commande en cours</a>
+            <a mat-button routerLink="/gerer" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Gerer les plats</a>
+            <a mat-button routerLink="/benefice" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Voir bénefice</a>
+          </li>
+        </ul>
+      </div>
+      <mat-icon (click)="openDialog()" *ngIf="isLessThenLargeDevice" matBadge="15" matBadgeColor="warn" style="cursor: pointer;">shopping_cart</mat-icon>
+      <button
+        *ngIf="isLessThenLargeDevice"
+        (click)="toggleSidenav.emit()"
+        class="sidenavtoggler ml-auto md:ml-3 ms-sm-3"
+        mat-icon-button
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div *ngIf="!isLessThenLargeDevice" class="items-center md:flex ml-auto">
+        <mat-icon (click)="openDialog()" matBadge="15" matBadgeColor="warn" style="cursor: pointer;">shopping_cart</mat-icon>
+        <a [routerLink]="['/connecter']" class="text-lg font-bold py-2 px-5">Se connecter</a>
+      </div>
+    </div>
+  </div>
+</header>
