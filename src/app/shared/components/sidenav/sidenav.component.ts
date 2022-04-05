@@ -26,4 +26,8 @@ export class SidenavComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+  deconnecter(){
+    alert("Deconnection!")
+  }
 }

@@ -19,6 +19,9 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { CommandesComponent } from './components/commandes/commandes.component';
 import { PanierComponent } from './components/panier/panier.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { SendmailComponent } from './components/sendmail/sendmail.component';
+import { MailComponent } from './components/mail/mail.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 const matModules = [
   HttpClientModule,
   MatToolbarModule,
@@ -30,12 +33,13 @@ const matModules = [
   MatListModule,
   MatExpansionModule,
   MatBadgeModule,
-  MatDialogModule
+  MatDialogModule,
+  GoogleMapsModule
 ];
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, LoaderComponent, SidenavComponent, PlatComponent, CommandesComponent, PanierComponent],
+  declarations: [HeaderComponent, FooterComponent, LoaderComponent, SidenavComponent, PlatComponent, CommandesComponent, PanierComponent, SendmailComponent, MailComponent],
   imports: [CommonModule, RouterModule, ...matModules],
-  exports: [HeaderComponent, FooterComponent, LoaderComponent, SidenavComponent,PlatComponent, ...matModules]
+  exports: [HeaderComponent, FooterComponent, LoaderComponent, SidenavComponent,PlatComponent,SendmailComponent,MailComponent,CommandesComponent, ...matModules]
 })
 export class SharedModule {}

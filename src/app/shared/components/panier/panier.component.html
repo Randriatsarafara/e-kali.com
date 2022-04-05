@@ -1,17 +1,17 @@
-<h2 mat-dialog-title style="border-bottom: 2px solid black;color:black">Votre pannier</h2>
+<h2 mat-dialog-title>Votre pannier</h2>
 <mat-dialog-content class="pannier">
 
   <div>
     <div class="table-inside">
       <div class="flex flex-col border ltLg:responsive">
-        <div class="flex items-center p-4 border-b hover:bg-blue-100">
+        <div class="flex items-center p-4 border-b">
           <div class="w-6/12 font-medium text-left">Plat</div>
           <div class="w-2/12 font-medium text-left">Restaurant</div>
           <div class="w-2/12 font-medium text-left">Prix en Ar</div>
           <div class="w-2/12 font-medium text-left">Quantite</div>
           <div class="w-1/12 font-medium text-left"></div>
         </div>
-        <div class="flex items-center p-4 border-b hover:bg-blue-100">
+        <div class="flex items-center p-4 border-b" *ngFor="let a of [1,2,3]">
           <div class="w-6/12">
             <a href="" class="flex hover:text-primary">
               <div class="max-h-16 w-16 flex-none mr-3 border">
@@ -29,6 +29,11 @@
             <button class="action_icon__btn" mat-icon-button>
               <mat-icon>delete</mat-icon>
             </button>
+          </div>
+        </div>
+        <div class="flex items-center p-4 border-b">
+          <div class="w-12/12 text-left">
+            <b>Total : <span bg-warn>5000000</span> Ariary</b>
           </div>
         </div>
       </div>

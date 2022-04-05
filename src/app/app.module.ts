@@ -10,9 +10,11 @@ import { AccueilComponent } from './pages/accueil/accueil.component';
 import { PlatsComponent } from './pages/plats/plats.component';
 import { LoginComponent } from './pages/login/login.component';
 import { InscriptionComponent } from './pages/inscription/inscription.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { CommandeComponent } from './pages/commande/commande.component';
 
 @NgModule({
-  declarations: [AppComponent, AccueilComponent, PlatsComponent, LoginComponent, InscriptionComponent],
+  declarations: [AppComponent, AccueilComponent, PlatsComponent, LoginComponent, InscriptionComponent, ContactComponent, CommandeComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, NgxSkeletonLoaderModule],
   providers: [],
   bootstrap: [AppComponent]

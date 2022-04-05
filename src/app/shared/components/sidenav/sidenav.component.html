@@ -1,11 +1,11 @@
 <div class="sidenav flex flex-col min-h-screen p-5">
     <mat-nav-list>
-      <a mat-list-item routerLink="/">Plats</a>
-      <a mat-list-item routerLink="/commandes">Commande en cours</a>
+      <a mat-list-item routerLink="/accueil">Plats</a>
+      <a mat-list-item routerLink="/commande">Commande en cours</a>
       <a mat-list-item routerLink="/gerer">Gerer les plats</a>
       <a mat-list-item routerLink="/benefice">Voir bénefice</a>
       <a mat-list-item (click)="openDialog()">Panier</a>
-      <a mat-list-item routerLink="/benefice">Se connecter</a>
-      <a mat-list-item routerLink="/benefice">Se deconnecter</a>
+      <a mat-list-item routerLink="/connecter">Se connecter</a>
+      <a mat-list-item (click)="deconnecter()">Se deconnecter</a>
     </mat-nav-list>
 </div>

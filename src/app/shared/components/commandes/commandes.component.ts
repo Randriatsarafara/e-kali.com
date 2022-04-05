@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./commandes.component.scss']
 })
 export class CommandesComponent implements OnInit {
-
+  advanceSearchExpanded: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
