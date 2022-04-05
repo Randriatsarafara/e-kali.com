@@ -1,15 +1,18 @@
 {
-  "name": "kali",
+  "name": "m1p9mean-fitahiana",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start" : "node server.js",
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "heroku-postbuild": "ng build --prod"
   },
-  "engines": { "node": "12.22.1", "npm": "6.14.16" },
+  "engines": {
+    "node": "12.22.1",
+    "npm": "6.14.16"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.0.3",
@@ -24,6 +27,7 @@
     "@angular/platform-browser-dynamic": "~12.0.3",
     "@angular/router": "~12.0.3",
     "@ngneat/tailwind": "^7.0.3",
+    "express": "^4.17.3",
     "ng-particles": "^2.7.3",
     "ngx-skeleton-loader": "^2.10.0",
     "rxjs": "~6.6.0",
