@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 $iconSize: 28px;
 $buttonSize: 28px;
 
@@ -15,7 +16,7 @@ $buttonSize: 28px;
 }
 .logo {
   max-width: 200px;
-  font-family: cursive;;
+  font-family: 'Monoton', cursive;
 }
 .sidenavtoggler {
   height: $buttonSize;

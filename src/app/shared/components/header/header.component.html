@@ -14,11 +14,11 @@
           </li>
         </ul>
       </div>
-      <mat-icon (click)="openDialog()" *ngIf="isLessThenLargeDevice" matBadge="15" matBadgeColor="warn" style="cursor: pointer;">shopping_cart</mat-icon>
+      <!-- <mat-icon (click)="openDialog()" *ngIf="isLessThenLargeDevice" matBadge="15" matBadgeColor="warn" style="cursor: pointer;">shopping_cart</mat-icon> -->
       <button
         *ngIf="isLessThenLargeDevice"
         (click)="toggleSidenav.emit()"
-        class="sidenavtoggler ml-auto md:ml-3 ms-sm-3"
+        class="sidenavtoggler ml-auto md:ml-3 ms-sm-3 mb-3"
         mat-icon-button
       >
         <mat-icon>menu</mat-icon>
