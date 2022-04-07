@@ -1,16 +1,11 @@
-const express = require('express');
-const app = express();
- 
-app.get('/', (req, res) => {
-  res
-    .status(200)
-    .send('Hello server is running')
-    .end();
-});
- 
-// Start the server
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-  console.log('Press Ctrl+C to quit.');
+const http = require("http");
+
+const app = require("./src/app.js");
+
+const server = http.createServer(app);
+
+const port = process.env.PORT || 3001;
+
+server.listen(port, () => {
+    console.log("Le serveur est en cours !!!");
 });
