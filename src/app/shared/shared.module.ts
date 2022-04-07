@@ -22,6 +22,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { SendmailComponent } from './components/sendmail/sendmail.component';
 import { MailComponent } from './components/mail/mail.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { NewplatComponent } from './components/newplat/newplat.component';
+import { AllplatComponent } from './components/allplat/allplat.component';
 const matModules = [
   HttpClientModule,
   MatToolbarModule,
@@ -38,7 +40,7 @@ const matModules = [
 ];
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, LoaderComponent, SidenavComponent, PlatComponent, CommandesComponent, PanierComponent, SendmailComponent, MailComponent],
+  declarations: [HeaderComponent, FooterComponent, LoaderComponent, SidenavComponent, PlatComponent, CommandesComponent, PanierComponent, SendmailComponent, MailComponent, NewplatComponent, AllplatComponent],
   imports: [CommonModule, RouterModule, ...matModules],
   exports: [HeaderComponent, FooterComponent, LoaderComponent, SidenavComponent,PlatComponent,SendmailComponent,MailComponent,CommandesComponent, ...matModules]
 })

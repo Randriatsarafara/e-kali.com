@@ -5,6 +5,7 @@ import { CommandeComponent } from './pages/commande/commande.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { InscriptionComponent } from './pages/inscription/inscription.component';
 import { LoginComponent } from './pages/login/login.component';
+import { PlatsComponent } from './pages/plats/plats.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'commande',
     component: CommandeComponent,
+  },
+  {
+    path: 'plats',
+    component: PlatsComponent,
   },
   {
     path: 'contact',
