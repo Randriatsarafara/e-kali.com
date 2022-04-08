@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const config = require('config');
 
+//Valider
 module.exports.create = (req, res) => {
     bcrypt.hash(req.body.password + req.body.nom + req.body.prenom, 10).then(async (hash) => {
         const user = new User({
@@ -21,6 +22,7 @@ module.exports.create = (req, res) => {
                 expiresIn: "365d"
             })
             res.status(201).json({
+                status:200,
                 success: {
                     id: result._id,
                     message: "Création du compte terminer",
@@ -29,9 +31,25 @@ module.exports.create = (req, res) => {
                 }
             })
         }).catch(err => {
+            let retour = err.message;
+            if(err.message.includes("type")){
+                retour = "Veiller sélectionner un type d'utilisateur";
+            }
+            if(err.message.includes("ville")){
+                retour = "Veiller sélectionner un ville";
+            }
+            else if(err.message.includes("email") && err.message.includes("duplicate key")){
+                retour = "Ce mail a dejà un compte";
+            }
+            else if(err.message.includes("numero") && err.message.includes("duplicate key")){
+                retour = "Ce numero a dejà un compte";
+            }
+            else if(err.message.includes("email")){
+                retour = "Entrer un mail valide";
+            }
             res.status(err.status || 500).json({
                 error: {
-                    message: err.message
+                    message: retour
                 }
             })
         })
@@ -39,28 +57,27 @@ module.exports.create = (req, res) => {
         res.status(err.status || 500).json({ error: { message: err.message } })
     })
 }
-
+//Valider
 module.exports.login = (req, res) => {
     User.findOne().or([
-        { numero: req.body.numero ? req.body.numero : "" },
-        { email: req.body.email ? req.body.email : "" }
+        { numero: req.body.login ? req.body.login : "" },
+        { email: req.body.login ? req.body.login : "" }
     ]).exec().then(user => {
         if (user) {
-            bcrypt.compare((req.body.password ? req.body.password : "") + user.nom, user.password)
+            bcrypt.compare((req.body.password ? req.body.password : "") + user.nom + user.prenom, user.password)
                 .then((result) => {
                     if (result) {
                         const token = jwt.sign({
                             id: user._id,
-                            nom: user.nom,
+                            name: user.prenom + " " + user.nom,
                             email: user.email
                         }, config.get('jwt_secret'), {
                             expiresIn: "365d"
                         })
                         res.status(200).json({
                             success: {
-                                message: "logging successful.",
+                                message: "Connection effectuée",
                                 id: user._id,
-                                nom: user.nom,
                                 role: user.role,
                                 name: user.prenom + " " + user.nom,
                                 token: token,
@@ -68,19 +85,54 @@ module.exports.login = (req, res) => {
                             }
                         })
                     } else {
-                        res.status(401).json({ error: { message: "Wrong password 1." } })
+                        res.status(401).json({ error: { message: "Verifier votre mot de passe" } })
                     }
                 }).catch(() => {
-                    res.status(401).json({ error: { message: "Wrong password 2." } })
+                    res.status(401).json({ error: { message: "Verifier votre mot de passe" } })
                 })
         } else {
-            res.status(401).json({ error: { message: "username or email not found." } })
+            res.status(401).json({ error: { message: "Verifier votre mail ou numero" } })
         }
     }).catch(err => {
-        res.status(err.status || 500).json({ error: err.message })
+        res.status(err.status || 500).json({ error: { message: err.message } })
     })
 }
-
+//En cours
+module.exports.userById = (req, res) => {
+    try {
+        User.aggregate([
+            {
+                $lookup:
+                {
+                    from: "types",
+                    localField: "role",
+                    foreignField: "_id",
+                    as: "role"
+                }
+            },{
+                $match: {
+                    "_id" : mongoose.Types.ObjectId(req.params.iduser)
+                } 
+            }
+        ]).exec().then((response)=>
+            {
+                res.status(200).json({
+                    success: {
+                        message: "Utilisateur avec une id "+req.params.iduser,
+                        data:response
+                    }
+                });
+            }
+        );
+    } catch (err) {
+        res.status(500).json({
+            error: {
+                message: "Il y a un probleme"
+            }
+        });
+    }
+}
+//Attend test
 module.exports.allUser = (req, res) => {
     User.find().exec().then(async (user) =>{
         res.status(200).json({
@@ -91,7 +143,7 @@ module.exports.allUser = (req, res) => {
         })
     })  
 }
-
+//Attend test
 module.exports.allResto = (req, res) => {
     User.find({role:"resto"}).exec().then(async (user) =>{
         res.status(200).json({
@@ -102,7 +154,7 @@ module.exports.allResto = (req, res) => {
         })
     })  
 }
-
+//Attend test
 module.exports.allLivreur = (req, res) => {
     User.find({role:"livreur"}).exec().then(async (user) =>{
         res.status(200).json({

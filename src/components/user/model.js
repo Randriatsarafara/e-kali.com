@@ -35,8 +35,14 @@ const userSchema = mongoose.Schema({
         ref: "Ville" 
     },
     role: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Type" 
+    },
+    status: {
         type: String,
-        required: true
+        match: /(ACTIVER|NON ACTIVER|SUPPRIMER)/,
+        required: true,
+        default : "NON ACTIVER"
     },
 });
 

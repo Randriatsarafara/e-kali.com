@@ -1,6 +1,6 @@
 const Commande = require("./model");
 const Detailcommande = require("./modeldetail");
-
+//Attend test
 module.exports.allCommande = (req, res) => {
     Commande.find().exec().then(async (commandes) =>{
         res.status(200).json({
@@ -11,7 +11,7 @@ module.exports.allCommande = (req, res) => {
         })
     }); 
 }
-
+//Attend test
 module.exports.detail = (req, res) => {
     Detailcommande.find({idcommande:req.params.idcommande}).exec().then(async (details) =>{
         res.status(200).json({

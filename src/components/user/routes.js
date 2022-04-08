@@ -8,5 +8,6 @@ Router.post("/create", Usercontroller.create);
 Router.post("/login", Usercontroller.login);
 Router.get("/resto", Usercontroller.allResto);
 Router.patch("/livreur", utilitaire.checkAuthResponsable, Usercontroller.allLivreur);
+Router.get("/:iduser", Usercontroller.userById);
 
 module.exports = Router;

@@ -1,6 +1,7 @@
 const Plat = require("./model");
 const uploadImage = require("../../utilitaire/uploadImage");
 
+//Attend test
 module.exports.allPlat = (req, res) => {
     Plat.find().exec().then(async (plats) =>{
         res.status(200).json({
@@ -11,7 +12,7 @@ module.exports.allPlat = (req, res) => {
         })
     }); 
 }
-
+//Attend test
 module.exports.platActif = (req, res) => {
     var perPage = req.query.limit ? parseInt(req.query.limit) : 10,
         page = req.query.page ? Math.max(0, parseInt(req.query.page)) : 1
@@ -51,7 +52,7 @@ module.exports.platActif = (req, res) => {
             res.status(500).json({ error: err.message })
         }) 
 }
-
+//Attend test
 module.exports.platByUser = (req, res) => {
     Plat.find({ user: req.params.idUser })
         .exec()
@@ -64,7 +65,7 @@ module.exports.platByUser = (req, res) => {
             })
         })
 }
-
+//Attend test
 module.exports.visible = (req, res) => {
     Plat.findOne({ _id: req.params.id, user: req.user._id }).exec().then(oldAnnonce => {
         if (!oldAnnonce) return res.status(404).json({ error: "error 404 not found !!!" })
@@ -77,7 +78,7 @@ module.exports.visible = (req, res) => {
         res.status(500).json({ error: err.message })
     })
 }
-
+//Attend test
 module.exports.invisible = (req, res) => {
     Plat.findOne({ _id: req.params.id, user: req.user._id }).exec().then(oldAnnonce => {
         if (!oldAnnonce) return res.status(404).json({ error: "error 404 not found !!!" })
@@ -90,7 +91,7 @@ module.exports.invisible = (req, res) => {
         res.status(500).json({ error: err.message })
     })
 }
-
+//Attend test
 module.exports.create = (req, res) => {
     uploadImage(req, res, async (error) => {
         if (req.files.length > 0) {
