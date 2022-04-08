@@ -1,6 +1,6 @@
   <div class="content__login p-4 sm:p-8 flex flex-col justify-center min-h-screen">
     <div class="login w-full max-w-xl rounded-md mx-auto border p-4 sm:p-8 xl:p-20">
-      <form>
+      <form [formGroup]="loginForm" (ngSubmit)="inscrire()">
         <h1 class="text-2xl font-bold text-center pb-5">Créer un compte</h1>
         <div class="mb-4 mt-6">
           <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Nom </label>
@@ -8,6 +8,7 @@
             class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
             id="email"
             type="text"
+            formControlName="nom"
           />
         </div>
         <div class="mb-4 mt-6">
@@ -16,6 +17,7 @@
             class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
             id="email"
             type="text"
+            formControlName="prenom"
           />
         </div>
         <div class="mb-4 mt-6">
@@ -24,6 +26,7 @@
             class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
             id="email"
             type="text"
+            formControlName="numero"
           />
         </div>
         <div class="mb-4 mt-6">
@@ -32,12 +35,19 @@
             class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
             id="email"
             type="email"
+            formControlName="email"
           />
         </div>
         <div class="mb-4 mt-6">
           <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Type </label>
-          <select class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10" name="" id="">
-            <option value="">Restaurant</option>
+          <select formControlName="role" class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10" name="" id="">
+            <option *ngFor="let typ of type" [value]="typ._id">{{typ.val}}</option>
+          </select>
+        </div>
+        <div class="mb-4 mt-6">
+          <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Ville </label>
+          <select formControlName="ville" class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10" name="" id="">
+            <option *ngFor="let vil of ville" [value]="vil._id">{{vil.val}}</option>
           </select>
         </div>
         <div class="mb-4 mt-6">
@@ -48,6 +58,7 @@
             type="text"
             rows="3"
             style="min-height: 100px;"
+            formControlName="adresse"
           ></textarea>
 
         </div>
@@ -56,7 +67,8 @@
           <input
             class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
             id="password"
-            type="password"
+            [type]="affiche"
+            formControlName="password"
           />
         </div>
         <div class="flex items-center">
@@ -64,6 +76,8 @@
             id="remember_me"
             name="remember_me"
             type="checkbox"
+            formControlName="check"
+            (click)="showhide()"
             class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border rounded"
           />
           <label for="remember_me" class="ml-2 block text-sm text-gray-900"> Afficher le mot de passe </label>
@@ -71,7 +85,7 @@
         <div class="flex w-full mt-6">
           <button
             class="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
-            type="button"
+            type="submit"
           >
             S'inscrire
           </button>

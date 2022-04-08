@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import { takeWhile } from 'rxjs/operators';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'accueil',
@@ -14,7 +15,7 @@ export class AccueilComponent implements OnInit {
   isSidenavExpand = false;
   isLessThenLargeDevice = true;
   isLoader = true;
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private userService: UserService,private breakpointObserver: BreakpointObserver) {
     this.breakpointObserver.observe(['(max-width: 1199px)']).pipe(takeWhile(() => this.isAlive)).subscribe(({matches}) => {
       this.isLessThenLargeDevice = matches;
       if (!matches) {

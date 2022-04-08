@@ -12,10 +12,27 @@ import { LoginComponent } from './pages/login/login.component';
 import { InscriptionComponent } from './pages/inscription/inscription.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { CommandeComponent } from './pages/commande/commande.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, AccueilComponent, PlatsComponent, LoginComponent, InscriptionComponent, ContactComponent, CommandeComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, NgxSkeletonLoaderModule],
+  declarations: [
+    AppComponent,
+    AccueilComponent,
+    PlatsComponent,
+    LoginComponent,
+    InscriptionComponent,
+    ContactComponent,
+    CommandeComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxSkeletonLoaderModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -7,15 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlatComponent implements OnInit {
 
-  isLoaded: boolean;
   advanceSearchExpanded: boolean = false;
   products = [];
+  isLoader = true;
   constructor() {}
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.isLoaded = true
-    }, 8000)
+      this.isLoader = false
+    }, 2000)
   }
 
 }

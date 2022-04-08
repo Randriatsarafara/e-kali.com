@@ -1,6 +1,8 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
 import { PanierComponent } from '../panier/panier.component';
 
 @Component({
@@ -12,9 +14,21 @@ export class HeaderComponent implements OnInit {
   @Output() toggleSidenav = new EventEmitter();
   isScrolled: boolean;
   isLessThenLargeDevice;
-  constructor(private breakpointObserver: BreakpointObserver,public dialog: MatDialog) {}
+  isLogged: boolean = false;
+  userType: string = "Client";
+  constructor(private router:Router,private userService: UserService,private breakpointObserver: BreakpointObserver,public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
+    if(this.userService.userById()==null){
+        this.userType = "Client";
+        this.isLogged = false;
+    }else{
+      this.userService.userById().subscribe((res)=>{
+        this.isLogged = true;
+        this.userType = res["success"]["data"][0].role[0].val;
+      });
+    }
     this.breakpointObserver.observe(['(max-width: 1199px)']).subscribe(({ matches }) => {
       this.isLessThenLargeDevice = matches;
     });
@@ -26,4 +40,12 @@ export class HeaderComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+  deconnecter(){
+    this.userService.logOut();
+    this.isLogged = false;
+    this.router.navigate(['/']);
+  }
+
+
 }
