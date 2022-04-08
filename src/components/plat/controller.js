@@ -12,19 +12,18 @@ module.exports.allPlat = (req, res) => {
         })
     }); 
 }
-//Attend test
+//Valider
 module.exports.platActif = (req, res) => {
     var perPage = req.query.limit ? parseInt(req.query.limit) : 10,
         page = req.query.page ? Math.max(0, parseInt(req.query.page)) : 1
     const query = {}
-    req.query.status ? query['status'] = "ACTIF" : null
-    req.query.designation ? query['designation'] = req.query.designation : null
+    query['status'] = "ACTIF"
     req.query.user ? query['user'] = req.query.user : null
-    req.query.prixMin ? query['prixVente'] = { $lt: req.query.prixMin } : null
-    req.query.prixMax ? query['prixVente'] = { $lt: req.query.prixMax } : null
+    req.query.prixMin ? query['prixVente'] = { $gte: req.query.prixMin } : null
+    req.query.prixMax ? query['prixVente'] = { $lte: req.query.prixMax } : null
     
     if (req.query.like) {
-        var keysSearchable = ["designation","prixAchat"]
+        var keysSearchable = ["designation","description"]
         var index = req.query.like.split(" ")
         index = index.map(el => el.trim())
         index = index.filter(f => f !== "")

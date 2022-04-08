@@ -9,5 +9,6 @@ Router.post("/login", Usercontroller.login);
 Router.get("/resto", Usercontroller.allResto);
 Router.patch("/livreur", utilitaire.checkAuthResponsable, Usercontroller.allLivreur);
 Router.get("/:iduser", Usercontroller.userById);
+Router.post("/sendMail", Usercontroller.sendMail);
 
 module.exports = Router;

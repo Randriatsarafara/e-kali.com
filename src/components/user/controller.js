@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const config = require('config');
+var nodemailer = require('nodemailer');
 
 //Valider
 module.exports.create = (req, res) => {
@@ -165,3 +166,41 @@ module.exports.allLivreur = (req, res) => {
         })
     })  
 }
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'ekali.send.mail@gmail.com',
+      pass: 'vfvuindntfzqpdbu'
+    }
+});
+//Attend test
+module.exports.sendMail = (req, res) => {
+    const mailOptions = {
+        from: req.body.clientmail,
+        to: 'ekali.send.mail@gmail.com',
+        subject: req.body.subject,
+        text: 
+        `
+        ${req.body.message}
+        
+        
+        Nom : ${req.body.name}
+        Numero : ${req.body.numero}
+        E-mail : ${req.body.clientmail}
+        `
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+    });
+}
+
+
+  
+  
+  
+  
