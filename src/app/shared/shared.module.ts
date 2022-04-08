@@ -39,10 +39,10 @@ const matModules = [
   MatDialogModule,
   GoogleMapsModule
 ];
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, LoaderComponent, SidenavComponent, PlatComponent, CommandesComponent, PanierComponent, SendmailComponent, MailComponent, NewplatComponent, AllplatComponent, MessageComponent],
-  imports: [CommonModule, RouterModule, ...matModules],
+  imports: [FormsModule, ReactiveFormsModule,CommonModule, RouterModule, ...matModules],
   exports: [HeaderComponent, FooterComponent, LoaderComponent, SidenavComponent,PlatComponent,SendmailComponent,MailComponent,CommandesComponent,MessageComponent, ...matModules]
 })
 export class SharedModule {}

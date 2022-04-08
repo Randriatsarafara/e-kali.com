@@ -25,7 +25,8 @@ export class HttptoolsService {
   makeBody (json) {
     let body = [];
     for (let key in json)
-      body.push(key + '=' + json[key]);
+      if(json[key]!=null)
+        body.push(key + '=' + json[key]);
     return body.join('&');
   }
 

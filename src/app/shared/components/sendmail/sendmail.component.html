@@ -7,30 +7,32 @@
       <div class="mb-8">
         <h3>Envoyer un message</h3>
       </div>
-      <form>
+      <form [formGroup]="loginForm" (ngSubmit)="sendMail()">
         <div class="flex flex-wrap sm:flex-nowrap sm:space-x-5 mt-3">
           <input
             type="text"
-            placeholder="Your Name"
+            placeholder="Votre nom"
             class="border border-gray-200 p-2 px-4 w-full sm:w-1/2 rounded-sm"
+            formControlName="nom"
           />
           <input
-            type="number"
-            placeholder="Your Number"
+            type="text"
+            placeholder="Votre numero"
             class="border border-gray-200 p-2 px-4 w-full sm:w-1/2 rounded-sm mt-3 sm:mt-0"
+            formControlName="numero"
           />
         </div>
-        <input type="email" placeholder="Your Email" class="border border-gray-200 p-2 px-4 w-full rounded-sm mt-5" />
-        <input type="text" placeholder="Subject" class="border border-gray-200 p-2 px-4 w-full rounded-sm mt-5" />
+        <input type="email" formControlName="mail" placeholder="Votre e-mail" class="border border-gray-200 p-2 px-4 w-full rounded-sm mt-5" />
+        <input type="text" formControlName="subject" placeholder="Objet" class="border border-gray-200 p-2 px-4 w-full rounded-sm mt-5" />
         <textarea
           cols="10"
           rows="4"
-          placeholder="Tell us about desired property"
-          [value]="''"
+          placeholder="Entrer votre message pour e-kali ici"
+          formControlName="message"
           class="border border-gray-200 p-3 mt-5 w-full rounded-sm mt-5"
         >
         </textarea>
-        <button class="px-5 py-2 bg-accent text-white mt-5 rounded font-medium">Envoyer</button>
+        <button type="submit" class="px-5 py-2 bg-accent text-white mt-5 rounded font-medium">Envoyer</button>
       </form>
     </div>
   </div>

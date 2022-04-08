@@ -7,22 +7,13 @@ import { HttptoolsService } from '../httptools/httptools.service';
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private http:HttpClient,private tools:HttptoolsService) {
-  }
+  constructor(private http:HttpClient,private tools:HttptoolsService) {}
 
   setUser (data:any) {
     localStorage.setItem('id', data['id']);
     localStorage.setItem('name', data['name']);
     localStorage.setItem('token', data['token']);
   }
-
-  // isLogged () {
-  //   if(localStorage.getItem('id') && localStorage.getItem('name') && localStorage.getItem('token') && this.user!=null){
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
 
   logOut(){
     localStorage.removeItem('id');
@@ -68,6 +59,29 @@ export class UserService {
     }else{
       return null;
     }
+  }
 
+  recettes(like=null,user=null,prixMin=null,prixMax=null,limit=null,page=null) {
+    let body = this.tools.makeBody({
+      'like' : like,
+      'user' : user,
+      'prixMin' : prixMin,
+      'prixMax' : prixMax,
+      'limit' : limit,
+      'page' : page
+    });
+    return this.http.get(base_url_node + '/plat/actif?'+body);
+  }
+
+  sendMailContact (nom:string, numero:string, mail:string, subject:string,message:string) {
+    const options = this.tools.formOption();
+    let body = {
+      'name':nom,
+      'clientmail':mail,
+      'subject':subject,
+      'numero':numero,
+      'message':message
+    };
+    return this.http.post(base_url_node+'/user/contact/mail', body,options);
   }
 }

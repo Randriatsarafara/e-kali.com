@@ -1,4 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
+import { MessageComponent } from '../message/message.component';
 
 @Component({
   selector: 'app-sendmail',
@@ -6,18 +12,40 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sendmail.component.scss']
 })
 export class SendmailComponent implements OnInit {
-
-  mapOptions: google.maps.MapOptions = {
-      center: { lat: 38.9987208, lng: -77.2538699 },
-      zoom : 14
-  }
-  marker = {
-      position: { lat: 38.9987208, lng: -77.2538699 },
-  }
-
-  constructor() { }
+  loginForm: FormGroup = new FormGroup({});
+  constructor(public dialog: MatDialog  ,private userService: UserService,private router:Router, private route: ActivatedRoute,private formBuilder: FormBuilder, private http:HttpClient) { }
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      nom: ['', Validators.required],
+      numero: ['', Validators.required],
+      mail: ['', Validators.required],
+      subject: ['', Validators.required],
+      message: ['', Validators.required],
+    })
+  }
+
+  sendMail(){
+    this.userService.sendMailContact(this.loginForm.value.nom,this.loginForm.value.numero,this.loginForm.value.mail,this.loginForm.value.subject,this.loginForm.value.message).subscribe(
+      (res)=>{
+        this.openMessage(false,"Message envoyer au responsable de e-kali");
+      },
+      (err)=>{
+        this.openMessage(true,"Message non envoyer");
+      }
+    )
+  }
+
+  openMessage(error:boolean=true,message:string) {
+    let icon = 'highlight_off';
+    let color = 'red';
+    if(!error){
+      icon = 'check_circle_outline';
+      color = 'green';
+    }
+    this.dialog.open(MessageComponent,{
+      data: { message: message,icon:icon,color:color },
+    });
   }
 
 }
