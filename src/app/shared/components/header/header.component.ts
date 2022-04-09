@@ -16,10 +16,12 @@ export class HeaderComponent implements OnInit {
   isLessThenLargeDevice;
   isLogged: boolean = false;
   userType: string = "Client";
+  countPanier: number = 0;
   constructor(private router:Router,private userService: UserService,private breakpointObserver: BreakpointObserver,public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
+    this.countPanier = this.userService.countPannier();
     if(this.userService.userById()==null){
         this.userType = "Client";
         this.isLogged = false;

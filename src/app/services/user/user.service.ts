@@ -14,6 +14,57 @@ export class UserService {
     localStorage.setItem('name', data['name']);
     localStorage.setItem('token', data['token']);
   }
+  addPanier (qt:any,id) {
+    const data = {
+      product: id,
+      quantite: parseInt(qt)
+    }
+    if(!localStorage.getItem("pannier")){
+      const datas = [];
+      datas.push(data);
+      localStorage.setItem('pannier', JSON.stringify(datas));
+    }else{
+      const datas = JSON.parse(localStorage.getItem("pannier"));
+      for(let i=0;i<datas.length;i++){
+        if(datas[i]['product']===id){
+          datas[i]['quantite'] += parseInt(qt);
+          localStorage.setItem('pannier', JSON.stringify(datas));
+          return;
+        }
+      }
+      datas.push(data);
+      localStorage.setItem('pannier', JSON.stringify(datas));
+    }
+    // alert(this.countPannier());
+  }
+
+  getPanier(){
+    const options = this.tools.formOption();
+    const data = JSON.parse(localStorage.getItem("pannier"));
+    const body = {
+      id : data
+    }
+    return this.http.post(base_url_node + '/plat/pannier/detail', body,options);
+  }
+
+  countPannier(){
+    let panier = 0;
+    if(localStorage.getItem("pannier")){
+      const datas = JSON.parse(localStorage.getItem("pannier"));
+      for(let a=0;a<datas.length;a++){
+        panier += parseInt(datas[a]['quantite']);
+      }
+    }
+    return panier;
+  }
+
+  removeAllPanier () {
+    localStorage.removeItem('pannier');
+  }
+
+  removePanier () {
+    localStorage.clear();
+  }
 
   logOut(){
     localStorage.removeItem('id');
@@ -70,7 +121,7 @@ export class UserService {
       'limit' : limit,
       'page' : page
     });
-    return this.http.get(base_url_node + '/plat/actif?'+body);
+    return this.http.get(base_url_node + '/plat/actif'+body);
   }
 
   sendMailContact (nom:string, numero:string, mail:string, subject:string,message:string) {

@@ -59,23 +59,25 @@
   <div class="grid grid-cols-12 gap-6 xxl:gap-8">
   <div *ngFor="let product of products" class="col-span-12 md:col-span-6 xl:col-span-4">
   <mat-card class="product">
-    <img mat-card-image src="../../../assets/images/accueil.jpg" alt="" style="width: 100%; margin: 0 0 20px" />
-    <mat-card-content class="flex">
-      <div class="flex-grow pl-3">
-        <h4 class="product__creator"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon><b> Tsiro</b> à Tana - Andoharanofotsy </h4>
-        <h2 class="product__name">
-          <a [routerLink]="['/products', 1]">{{product.designation}} <span class="product__price text-accent font-bold"> {{product.prixVente}}Ar </span></a>
-        </h2>
-      </div>
-    </mat-card-content>
-    <mat-card-actions class="product__action flex justify-between">
-      <div class="flex-1 text-center flex items-center justify-center">
-        <input [value]="a" type="number" class="text-accent p-2 px-4 w-full sm:w-1/2 rounded-sm" />
-      </div>
-      <div class="flex-1 text-center">
-        <a [routerLink]="['/products', 1]" mat-raised-button color="warn" class="px-4">Ajouter panier</a>
-      </div>
-    </mat-card-actions>
+    <!-- <form (ngSubmit)="addPanier(product._id,y)"> -->
+          <img mat-card-image src="../../../assets/images/accueil.jpg" alt="" style="width: 100%; margin: 0 0 20px" />
+          <mat-card-content class="flex">
+            <div class="flex-grow pl-3">
+              <h4 class="product__creator"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon><b> Tsiro</b> à Tana - Andoharanofotsy </h4>
+              <h2 class="product__name">
+                <a [routerLink]="['/products', 1]">{{product.designation}} <span class="product__price text-accent font-bold"> {{product.prixVente}}Ar </span></a>
+              </h2>
+            </div>
+          </mat-card-content>
+          <mat-card-actions class="product__action flex justify-between">
+            <div class="flex-1 text-center flex items-center justify-center">
+              <input id="id_{{product._id}}" value="1" [placeholder]="y" type="number" class="text-accent p-2 px-4 w-full sm:w-1/2 rounded-sm" />
+            </div>
+            <div class="flex-1 text-center">
+              <a (click)="addPanier('id_'+product._id,product._id)" mat-raised-button color="warn" class="px-4">Ajouter panier</a>
+            </div>
+          </mat-card-actions>
+    <!-- </form> -->
   </mat-card>
   </div>
 </div>

@@ -27,7 +27,7 @@ export class HttptoolsService {
     for (let key in json)
       if(json[key]!=null)
         body.push(key + '=' + json[key]);
-    return body.join('&');
+    return "?"+body.join('&');
   }
 
 }
