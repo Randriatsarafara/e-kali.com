@@ -1,5 +1,6 @@
 const Plat = require("./model");
 const uploadImage = require("../../utilitaire/uploadImage");
+const { mongoose } = require("mongoose");
 
 //Attend test
 module.exports.allPlat = (req, res) => {
@@ -111,4 +112,49 @@ module.exports.create = (req, res) => {
             res.status(500).json({ error })
         }
     })
+}
+
+//Valider
+module.exports.detailPannier = (req, res) => {
+    try {
+        let tab = [];
+        if(!req.body.id){
+            return;
+        }
+        for(let i=0;i<req.body.id.length;i++){
+            tab.push(mongoose.Types.ObjectId(req.body.id[i].product));
+        }
+        Plat.aggregate([
+            {
+                $lookup:
+                {
+                    from: "users",
+                    localField: "user",
+                    foreignField: "_id",
+                    as: "userlib"
+                }
+            },{
+                $match: {
+                    "_id" : {
+                        "$in": tab
+                    }
+                } 
+            }
+        ]).exec().then((response)=>
+            {
+                res.status(200).json({
+                    success: {
+                        message: "Detail pannier",
+                        data:response
+                    }
+                });
+            }
+        );
+    } catch (err) {
+        res.status(500).json({
+            error: {
+                message: "Il y a un probleme"
+            }
+        });
+    }
 }

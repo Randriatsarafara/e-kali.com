@@ -174,7 +174,7 @@ const transporter = nodemailer.createTransport({
       pass: 'vfvuindntfzqpdbu'
     }
 });
-//Attend test
+//Valider
 module.exports.sendMail = (req, res) => {
     const mailOptions = {
         from: req.body.clientmail,
@@ -192,9 +192,17 @@ module.exports.sendMail = (req, res) => {
     };
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
-          console.log(error);
+            res.status(401).json({
+                error: {
+                    message: error
+                }
+            })
         } else {
-          console.log('Email sent: ' + info.response);
+            res.status(200).json({
+                success: {
+                    message: "Mail envoyer"
+                }
+            })
         }
     });
 }
