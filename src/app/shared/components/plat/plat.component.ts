@@ -20,12 +20,6 @@ export class PlatComponent implements OnInit {
   formPanier: FormGroup = new FormGroup({});
   constructor(private router:Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private http:HttpClient, private userService: UserService) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    alert("Mety")
-  }
-
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       like: [null],
@@ -67,6 +61,11 @@ export class PlatComponent implements OnInit {
 
   addPanier(val: any,id){
     var containputiner = document.querySelector("#"+val);
+    if(parseInt(containputiner['value'])<=0){
+      this.userService.openMessage(true,"Entrer une quantite valide");
+      return;
+    }
+    this.userService.openMessage(false,`Quantite ${containputiner['value']} ajouter au pannier`);
     this.userService.addPanier(containputiner['value'],id);
   }
 

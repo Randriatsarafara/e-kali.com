@@ -55,7 +55,9 @@
     <h1 class="ll-section-head__heaidng">RECETTES</h1>
   </div>
 
-
+  <div *ngIf="products.length<1" class="col-span-12 md:col-span-6 xl:col-span-4 text-center">
+    <b>Aucun recette</b>
+  </div>
   <div class="grid grid-cols-12 gap-6 xxl:gap-8">
   <div *ngFor="let product of products" class="col-span-12 md:col-span-6 xl:col-span-4">
   <mat-card class="product">

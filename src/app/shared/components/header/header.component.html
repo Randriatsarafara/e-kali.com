@@ -23,9 +23,10 @@
       >
         <mat-icon>menu</mat-icon>
       </button>
-      <div *ngIf="!isLessThenLargeDevice" class="items-center md:flex ml-auto">
-        <mat-icon (click)="openDialog()" [matBadge]="countPanier" matBadgeColor="warn" style="cursor: pointer;">shopping_cart</mat-icon>
+      <div *ngIf="!isLessThenLargeDevice" class="items-center md:flex ml-auto menu-left">
+        <mat-icon (click)="openDialog()" [matBadge]="countPanier" matBadgeColor="warn" style="cursor: pointer;margin-right: 10px;">shopping_cart</mat-icon>
         <a *ngIf="!isLogged" [routerLink]="['/connecter']" class="text-lg font-bold py-2 px-5" style="cursor: pointer;">Se connecter</a>
+        <a *ngIf="!isLogged" [routerLink]="['/inscrire']" class="text-lg font-bold py-2 px-5" style="cursor: pointer;">S'inscrire</a>
         <a *ngIf="isLogged" mat-list-item (click)="deconnecter()" class="text-lg font-bold py-2 px-5" style="cursor: pointer;">Se deconnecter</a>
       </div>
     </div>

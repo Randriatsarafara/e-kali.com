@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UserService } from 'src/app/services/user/user.service';
 export class PanierComponent implements OnInit {
   commande:any;
   total= 0;
-  constructor(private userService: UserService) { }
+  constructor(private router:Router,private userService: UserService) { }
 
   ngOnInit(): void {
     const data = JSON.parse(localStorage.getItem("pannier"));
@@ -30,4 +31,28 @@ export class PanierComponent implements OnInit {
     this.userService.getPanier().subscribe(success,error);
   }
 
+  valider(){
+    let reste = [];
+    if(!localStorage.getItem("id")){
+      this.userService.openMessage(true,"Veillez vous connecter pour faire une commande");
+      this.router.navigate(['/connecter']);
+      return;
+    }
+    for(let i=0;i<this.commande.length;i++){
+      var containputiner = document.querySelector("#panier_"+this.commande[i]._id);
+      const id = { product:this.commande[i]._id,quantite:containputiner['value'] };
+      reste.push(id);
+    }
+    const va = {id:reste,user: localStorage.getItem("id")};
+    this.userService.newCommande(va).subscribe((res)=>{
+      this.userService.openMessage(false,res["success"]["message"]);
+      localStorage.removeItem("pannier");
+    },(err)=>{
+      this.userService.openMessage(true,err["error"]["message"]);
+    });
+  }
+
+  removePannierById(id){
+    this.userService.removePanierById(id);
+  }
 }

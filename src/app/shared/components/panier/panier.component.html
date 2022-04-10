@@ -19,10 +19,10 @@
           <div class="w-4/12 text-left">{{c['userlib'][0]["nom"]}}</div>
           <div class="w-2/12 text-left">{{c['prixVente']}}Ar</div>
           <div class="w-2/12 text-left">
-            {{c['quantite']}}
+            <input id="panier_{{c['_id']}}" style="width: 100px;height: 50px;color: black;font-family: bold;font-size: 20px;border: none;" type="number" [value]="c['quantite']">
           </div>
           <div class="w-1/12 text-left">
-            <button class="action_icon__btn" mat-icon-button>
+            <button class="action_icon__btn" (click)="removePannierById(c['_id'])" mat-icon-button>
               <mat-icon>delete</mat-icon>
             </button>
           </div>
@@ -33,11 +33,11 @@
   </div>
 
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions align="start">
   <div class="flex items-center p-4 border-b">
     <div class="w-12/12 text-left">
       <b>Total : <span bg-warn>{{total}}</span> Ariary</b>
     </div>
   </div>
-  <button mat-button [mat-dialog-close]="true" mat-raised-button color="warn" cdkFocusInitial>Commander</button>
+  <button (click)="valider()" mat-button [mat-dialog-close]="true" mat-raised-button color="warn" cdkFocusInitial>Commander</button>
 </mat-dialog-actions>

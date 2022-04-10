@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
-import { MessageComponent } from 'src/app/shared/components/message/message.component';
 
 @Component({
   selector: 'app-inscription',
@@ -51,28 +50,17 @@ export class InscriptionComponent implements OnInit {
           id : response.success.id,
           name : response.success.name
         };
-        this.openMessage(false,response.success.message);
+        this.userService.openMessage(false,response.success.message);
         this.userService.setUser(input);
         this.router.navigate(['/']);
       } else {
-        this.openMessage(true,response.error.error.message);
+        this.userService.openMessage(true,response.error.error.message);
       }
     };
     const error = response => {
-      this.openMessage(true,response.error.error.message);
+      this.userService.openMessage(true,response.error.error.message);
     };
     this.userService.inscription(this.loginForm.value.nom, this.loginForm.value.prenom, this.loginForm.value.email, this.loginForm.value.adresse,this.loginForm.value.numero,this.loginForm.value.password,this.loginForm.value.ville,this.loginForm.value.role).subscribe(success, error);
-  }
-  openMessage(error:boolean=true,message:string) {
-    let icon = 'highlight_off';
-    let color = 'red';
-    if(!error){
-      icon = 'check_circle_outline';
-      color = 'green';
-    }
-    this.dialog.open(MessageComponent,{
-      data: { message: message,icon:icon,color:color },
-    });
   }
 
 }

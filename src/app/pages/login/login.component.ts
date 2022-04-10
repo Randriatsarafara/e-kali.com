@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   login = ()=>{
     if(this.loginForm.invalid) {
-      this.openMessage(true,"Complete toute les champs!");
+      this.userService.openMessage(true,"Complete toute les champs!");
       return;
     };
     const data = this.loginForm.value;
@@ -48,19 +48,9 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
     }
     const error = (response:any) => {
-      this.openMessage(true,response.error.error.message);
+      this.userService.openMessage(true,response.error.error.message);
     };
     this.userService.login(data.login,data.password).subscribe(success,error);
   }
-  openMessage(error:boolean=true,message:string) {
-    let icon = 'highlight_off';
-    let color = 'red';
-    if(!error){
-      icon = 'check_circle_outline';
-      color = 'green';
-    }
-    this.dialog.open(MessageComponent,{
-      data: { message: message,icon:icon,color:color },
-    });
-  }
+
 }

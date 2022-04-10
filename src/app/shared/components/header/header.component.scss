@@ -30,6 +30,10 @@ $buttonSize: 28px;
   line-height: $iconSize;
 }
 
+.menu-left a:hover{
+  background-color: #e5e7eb;
+  // color: #e5e7eb;
+}
 @media (min-width: 768px) {
   $iconSize: 28px;
   $buttonSize: 28px;

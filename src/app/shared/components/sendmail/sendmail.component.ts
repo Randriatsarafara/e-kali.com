@@ -28,24 +28,12 @@ export class SendmailComponent implements OnInit {
   sendMail(){
     this.userService.sendMailContact(this.loginForm.value.nom,this.loginForm.value.numero,this.loginForm.value.mail,this.loginForm.value.subject,this.loginForm.value.message).subscribe(
       (res)=>{
-        this.openMessage(false,"Message envoyer au responsable de e-kali");
+        this.userService.openMessage(false,"Message envoyer au responsable de e-kali");
       },
       (err)=>{
-        this.openMessage(true,"Message non envoyer");
+        this.userService.openMessage(true,"Message non envoyer");
       }
     )
-  }
-
-  openMessage(error:boolean=true,message:string) {
-    let icon = 'highlight_off';
-    let color = 'red';
-    if(!error){
-      icon = 'check_circle_outline';
-      color = 'green';
-    }
-    this.dialog.open(MessageComponent,{
-      data: { message: message,icon:icon,color:color },
-    });
   }
 
 }

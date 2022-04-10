@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MessageComponent } from 'src/app/shared/components/message/message.component';
 import { base_url_node } from 'src/environments/environment.prod';
 import { HttptoolsService } from '../httptools/httptools.service';
 
@@ -7,13 +9,26 @@ import { HttptoolsService } from '../httptools/httptools.service';
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private http:HttpClient,private tools:HttptoolsService) {}
+  constructor(public dialog: MatDialog,private http:HttpClient,private tools:HttptoolsService) {}
 
   setUser (data:any) {
     localStorage.setItem('id', data['id']);
     localStorage.setItem('name', data['name']);
     localStorage.setItem('token', data['token']);
   }
+
+  openMessage(error:boolean=true,message:string) {
+    let icon = 'highlight_off';
+    let color = 'red';
+    if(!error){
+      icon = 'check_circle_outline';
+      color = 'green';
+    }
+    this.dialog.open(MessageComponent,{
+      data: { message: message,icon:icon,color:color },
+    });
+  }
+
   addPanier (qt:any,id) {
     const data = {
       product: id,
@@ -35,7 +50,6 @@ export class UserService {
       datas.push(data);
       localStorage.setItem('pannier', JSON.stringify(datas));
     }
-    // alert(this.countPannier());
   }
 
   getPanier(){
@@ -45,6 +59,15 @@ export class UserService {
       id : data
     }
     return this.http.post(base_url_node + '/plat/pannier/detail', body,options);
+  }
+
+  removePanierById(id){
+    const data = JSON.parse(localStorage.getItem("pannier"));
+    const indexOfObject = data.findIndex(object => {
+      return object.product === id;
+    });
+    data.splice(indexOfObject, 1);
+    localStorage.setItem('pannier', JSON.stringify(data));
   }
 
   countPannier(){
@@ -134,5 +157,10 @@ export class UserService {
       'message':message
     };
     return this.http.post(base_url_node+'/user/contact/mail', body,options);
+  }
+
+  newCommande(commande:any){
+    const options = this.tools.formOption();
+    return this.http.post(base_url_node+'/commande/create', commande,options);
   }
 }
