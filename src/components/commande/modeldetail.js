@@ -15,15 +15,18 @@ const commandedetailSchema = mongoose.Schema({
     prix: {
         type: Number,
         required: true,
+        min: 1
     },
     quantite: {
         type: Number,
         required: true,
+        min: 1
     },
     status: {
         type: String,
-        match: /(A LIVRER|LIVRER|ANNULER)/,
-        required: true
+        match: /(EN ATTENTE|A LIVRER|LIVRER|ANNULER)/,
+        required: true,
+        default: "EN ATTENTE"
     },
 });
 

@@ -36,13 +36,13 @@ module.exports.platActif = (req, res) => {
         }
         query['$or'] = orQuery
     }
+    console.log(query)
     Plat.find(query)
         .limit(perPage)
         .skip(perPage * (page - 1))
         .sort(req.query.sort ? req.query.sort : "-createdAt")
         .exec().then(async (results) => {
-            const count = await Plat.countDocuments(query).exec()
-            
+            const count = await Plat.countDocuments(query).exec()  
             res.status(200).json({
                 results,
                 count,
@@ -113,7 +113,6 @@ module.exports.create = (req, res) => {
         }
     })
 }
-
 //Valider
 module.exports.detailPannier = (req, res) => {
     try {

@@ -9,10 +9,6 @@ const commandeSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
-    quantite: {
-        type: Number,
-        required: true,
-    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -21,12 +17,19 @@ const commandeSchema = mongoose.Schema({
     adresselivraison: String,
     status: {
         type: String,
-        match: /(A LIVRER|LIVRER|ANNULER)/,
-        required: true
+        match: /(EN ATTENTE|A LIVRER|LIVRER|ANNULER)/,
+        required: true,
+        default: "EN ATTENTE"
     },
     prixlivraison: {
         type: Number,
         required: true,
+        default: 2000.0,
+        min: 0
+    },
+    createdAt: {
+        type: Date,
+        required: true
     },
 });
 

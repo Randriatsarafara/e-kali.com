@@ -25,7 +25,8 @@ const platSchema = mongoose.Schema({
     status: {
         type: String,
         match: /(ACTIF|PENDING)/,
-        required: true
+        required: true,
+        default: "ACTIF"
     }
 });
 
