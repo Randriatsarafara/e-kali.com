@@ -36,7 +36,8 @@ const userSchema = mongoose.Schema({
     },
     role: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Type" 
+        ref: "Type",
+        default: mongoose.Types.ObjectId("624faef093fc20f662af744c")
     },
     status: {
         type: String,

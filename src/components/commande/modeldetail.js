@@ -12,6 +12,13 @@ const commandedetailSchema = mongoose.Schema({
         ref: "Plat",
         required: true,
     },
+    idvendeur: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+    },
+    idplatlib: {
+        type: JSON
+    },
     prix: {
         type: Number,
         required: true,

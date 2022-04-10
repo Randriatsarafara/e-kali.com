@@ -29,10 +29,12 @@ module.exports.checkAuthClient = (req, res, next) => {
 }
 
 module.exports.checkAuthRestaurant = (req, res, next) => {
+   
     try {
         const token = req.headers.authorization.split(" ")[1];
         const decode = jwt.verify(token, config.get('jwt_secret'));
         User.findById(decode.id).exec().then(result => {
+            console.log(result)
             if (!result) {
                 return res.status(401).json({
                     error: {
@@ -40,7 +42,7 @@ module.exports.checkAuthRestaurant = (req, res, next) => {
                     }
                 });
             } else {
-                if ( (result.role == 'resto')){
+                if ( (result.role == '624faee393fc20f662af744b')){
                     req.user = result;
                     next();
                 }
@@ -68,6 +70,7 @@ module.exports.checkAuthResponsable = (req, res, next) => {
         const token = req.headers.authorization.split(" ")[1];
         const decode = jwt.verify(token, config.get('jwt_secret'));
         User.findById(decode.id).exec().then(result => {
+            console.log(result)
             if (!result) {
                 return res.status(401).json({
                     error: {
@@ -75,7 +78,7 @@ module.exports.checkAuthResponsable = (req, res, next) => {
                     }
                 });
             } else {
-                if (result.role == 'responsable'){
+                if (result.role == '624faf1393fc20f662af744f'){
                     req.user = result;
                     next();
                 }
@@ -110,7 +113,7 @@ module.exports.checkAuthLivreur = (req, res, next) => {
                     }
                 });
             } else {
-                if (result.role == 'livreur'){
+                if (result.role == '624faf0893fc20f662af744e'){
                     req.user = result;
                     next();
                 }

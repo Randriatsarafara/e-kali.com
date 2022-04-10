@@ -36,7 +36,6 @@ module.exports.platActif = (req, res) => {
         }
         query['$or'] = orQuery
     }
-    console.log(query)
     Plat.find(query)
         .limit(perPage)
         .skip(perPage * (page - 1))
@@ -52,9 +51,9 @@ module.exports.platActif = (req, res) => {
             res.status(500).json({ error: err.message })
         }) 
 }
-//Attend test
+//Valider
 module.exports.platByUser = (req, res) => {
-    Plat.find({ user: req.params.idUser })
+    Plat.find({ user: req.params.iduser })
         .exec()
         .then(result => {
             res.status(200).json(result)
@@ -65,6 +64,34 @@ module.exports.platByUser = (req, res) => {
             })
         })
 }
+//Valider
+module.exports.platById = (req, res) => {
+    Plat.findOne({ _id: req.params.id })
+        .exec()
+        .then(result => {
+            res.status(200).json(result)
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: err
+            })
+        })
+}
+
+//En cours
+module.exports.updateById = (req, res) => {
+    console.log(req);
+    Plat.updateOne({ _id: req.user.id }, { ...req.body}).then(result => {
+        res.status(200).json({
+            resultat: result
+        })
+    }).catch(err => {
+        res.status(401).json({
+            message: err.message
+        })
+    })
+}
+
 //Attend test
 module.exports.visible = (req, res) => {
     Plat.findOne({ _id: req.params.id, user: req.user._id }).exec().then(oldAnnonce => {
@@ -93,25 +120,34 @@ module.exports.invisible = (req, res) => {
 }
 //Attend test
 module.exports.create = (req, res) => {
-    uploadImage(req, res, async (error) => {
-        if (req.files.length > 0) {
-            const images = req.files.req.files;
+    // uploadImage(req, res, async (error) => {
+    //     if (req.files.length > 0) {
+            // const images = req.files.req.files;
             // build data
+            if(req.body.designation==="" || req.body.designation===null || req.body.designation===undefined){
+                res.status(500).json({ error: {message : "Designation invalide"} })
+            }
+            if(req.body.prixVente<=0 || req.body.prixVente===null || req.body.prixVente===undefined){
+                res.status(500).json({ error: {message : "Prix vente invalide"} })
+            }
+            if(req.body.prixAchat<=0 || req.body.prixAchat===null || req.body.prixAchat===undefined){
+                res.status(500).json({ error: {message : "Prix achat invalide"} })
+            }
             const data = {
                 ...req.body,
-                images,
+                // images,
                 createdAt: new Date()
             }
-            const annonce = new Annonce({ ...data, _id: mongoose.Types.ObjectId() })
-            annonce.save().then((result) => {
-                res.status(201).json(res_forward)
+            const plat = new Plat({ ...data, _id: mongoose.Types.ObjectId() })
+            plat.save().then((result) => {
+                res.status(200).json(result)
             }).catch(error => {
-                res.status(500).json({ error: error.message })
+                res.status(500).json({ error: {message : error.message} })
             })
-        } else {
-            res.status(500).json({ error })
-        }
-    })
+    //     } else {
+    //         res.status(500).json({ error })
+    //     }
+    // })
 }
 //Valider
 module.exports.detailPannier = (req, res) => {

@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const platSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     designation: {
-        type: String, required: true,unique: true
+        type: String, 
+        required: true
     },
     description: {
         type: String
