@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user/user.service';
 export class PlatComponent implements OnInit {
 
   advanceSearchExpanded: boolean = false;
+  @Input()addHuhu:Function;
   products = [];
   count = 0;
   current_page = 1;

@@ -1,0 +1,98 @@
+<div class="content__login p-4 sm:p-8 flex flex-col justify-center min-h-screen">
+  <div class="login w-full max-w-xl rounded-md mx-auto border p-4 sm:p-8">
+    <div>
+      <a [routerLink]="['/admin/listuser']"  class="text-gray-700 text-sm hover:text-accent inline-flex items-center"><mat-icon class="h-4 w-4 leading-4 text-lg mr-2">list</mat-icon>Voir la liste</a>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="inscrire()">
+      <h1 class="text-2xl font-bold text-center pb-5">Créer un utilisateur</h1>
+      <div class="mb-4 mt-6">
+        <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Nom </label>
+        <input
+          class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+          id="nom"
+          type="text"
+          formControlName="nom"
+        />
+      </div>
+      <div class="mb-4 mt-6">
+        <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Prenom </label>
+        <input
+          class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+          id="prenom"
+          type="text"
+          formControlName="prenom"
+        />
+      </div>
+      <div class="mb-4 mt-6">
+        <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Numero </label>
+        <input
+          class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+          id="numero"
+          type="text"
+          formControlName="numero"
+        />
+      </div>
+      <div class="mb-4 mt-6">
+        <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Email </label>
+        <input
+          class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+          id="email"
+          type="email"
+          formControlName="email"
+        />
+      </div>
+      <div class="mb-4 mt-6">
+        <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Type </label>
+        <select formControlName="role" class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10" name="" id="">
+          <option *ngFor="let typ of type" [value]="typ._id">{{typ.val}}</option>
+        </select>
+      </div>
+      <div class="mb-4 mt-6">
+        <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Ville </label>
+        <select formControlName="ville" class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10" name="" id="">
+          <option *ngFor="let vil of ville" [value]="vil._id">{{vil.val}}</option>
+        </select>
+      </div>
+      <div class="mb-4 mt-6">
+        <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Adresse </label>
+        <textarea
+          class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+          id="adresse"
+          type="text"
+          rows="3"
+          style="min-height: 100px;"
+          formControlName="adresse"
+        ></textarea>
+
+      </div>
+      <div class="mb-4 mt-6">
+        <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Mot de passe </label>
+        <input
+          class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+          id="password"
+          [type]="affiche"
+          formControlName="password"
+        />
+      </div>
+      <div class="flex items-center">
+        <input
+          id="remember_me"
+          name="remember_me"
+          type="checkbox"
+          formControlName="check"
+          (click)="showhide()"
+          class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border rounded"
+        />
+        <label for="remember_me" class="ml-2 block text-sm text-gray-900"> Afficher le mot de passe </label>
+      </div>
+      <div class="flex w-full mt-6">
+        <button
+          class="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
+          type="submit"
+        >
+          Enregistrer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

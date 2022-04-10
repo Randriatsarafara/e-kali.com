@@ -8,11 +8,12 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./panier.component.scss']
 })
 export class PanierComponent implements OnInit {
-  commande:any;
+  commande:any = [];
   total= 0;
   constructor(private router:Router,private userService: UserService) { }
 
-  ngOnInit(): void {
+  panier(){
+    this.total=0;
     const data = JSON.parse(localStorage.getItem("pannier"));
     const success = (res)=>{
       for(let i=0;i<data.length;i++){
@@ -30,6 +31,9 @@ export class PanierComponent implements OnInit {
     }
     this.userService.getPanier().subscribe(success,error);
   }
+  ngOnInit(): void {
+    this.panier();
+  }
 
   valider(){
     let reste = [];
@@ -38,21 +42,31 @@ export class PanierComponent implements OnInit {
       this.router.navigate(['/connecter']);
       return;
     }
+    // if(this.commande.length<1){
+    //   this.userService.openMessage(true,"Panier vide");
+    // }
     for(let i=0;i<this.commande.length;i++){
       var containputiner = document.querySelector("#panier_"+this.commande[i]._id);
+      if(parseInt(containputiner['value'])<=0){
+        this.userService.openMessage(true,"Entrer une quantite valide");
+        return;
+      }
       const id = { product:this.commande[i]._id,quantite:containputiner['value'] };
       reste.push(id);
     }
     const va = {id:reste,user: localStorage.getItem("id")};
     this.userService.newCommande(va).subscribe((res)=>{
+      console.log(res);
       this.userService.openMessage(false,res["success"]["message"]);
       localStorage.removeItem("pannier");
     },(err)=>{
-      this.userService.openMessage(true,err["error"]["message"]);
+      console.log(err)
+      this.userService.openMessage(true,err.error.error.message);
     });
   }
 
   removePannierById(id){
     this.userService.removePanierById(id);
+    this.panier();
   }
 }

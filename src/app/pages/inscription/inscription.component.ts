@@ -26,7 +26,7 @@ export class InscriptionComponent implements OnInit {
       numero: ['', Validators.required],
       password: ['', Validators.required],
       ville: ['', Validators.required],
-      role: ['', Validators.required],
+      // role: ['', Validators.required],
       check: [false, Validators.required]
     })
     this.userService.allVille().subscribe((res)=>this.ville = res['success']['data'])

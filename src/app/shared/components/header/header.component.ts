@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
@@ -15,8 +15,8 @@ export class HeaderComponent implements OnInit {
   isScrolled: boolean;
   isLessThenLargeDevice;
   isLogged: boolean = false;
-  userType: string = "Client";
-  countPanier: number = 0;
+  userType: string;
+  @Input() countPanier: number = 0;
   constructor(private router:Router,private userService: UserService,private breakpointObserver: BreakpointObserver,public dialog: MatDialog) {
   }
 
@@ -46,8 +46,12 @@ export class HeaderComponent implements OnInit {
   deconnecter(){
     this.userService.logOut();
     this.isLogged = false;
+    this.userType = "Client";
     this.router.navigate(['/']);
   }
-
+  addHuhu(){
+    // console.log(this.countPanier)
+    return this.countPanier = this.userService.countPannier();
+  }
 
 }

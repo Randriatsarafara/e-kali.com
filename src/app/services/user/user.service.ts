@@ -80,7 +80,10 @@ export class UserService {
     }
     return panier;
   }
+  addhuhu(){
+    console.log("huhu");
 
+  }
   removeAllPanier () {
     localStorage.removeItem('pannier');
   }
@@ -162,5 +165,63 @@ export class UserService {
   newCommande(commande:any){
     const options = this.tools.formOption();
     return this.http.post(base_url_node+'/commande/create', commande,options);
+  }
+
+  commandeEnCours(like=null,user=null,prixMin=null,prixMax=null,limit=null,page=null) {
+    const options = this.tools.formOption(true);
+    let body = this.tools.makeBody({
+      'like' : like,
+      'user' : user,
+      'prixMin' : prixMin,
+      'prixMax' : prixMax,
+      'limit' : limit,
+      'page' : page
+    });
+    return this.http.patch(base_url_node + '/commande/encours'+body,{},options);
+  }
+
+  detailCommande(idcommande) {
+    return this.http.get(base_url_node + '/commande/detail/'+idcommande);
+  }
+
+  newplat (designation:string, description:string, prixAchat:number, prixVente:number,id:string) {
+    const options = this.tools.formOption();
+    let body = {
+      'designation':designation,
+      'description':description,
+      'prixAchat':prixAchat,
+      'prixVente':prixVente,
+      'user':id
+    };
+    return this.http.post(base_url_node+'/plat/create', body,options);
+  }
+
+  platByUser(iduser) {
+    return this.http.get(base_url_node + '/plat/all/'+iduser);
+  }
+
+  platById(id) {
+    return this.http.get(base_url_node + '/plat/detail/'+id);
+  }
+
+  benefice(id) {
+    const options = this.tools.formOption();
+    const body = {
+      'idvendeur':id
+    }
+    return this.http.post(base_url_node + '/commande/listeDetail', body,options);
+  }
+
+  commandeAll(like=null,user=null,prixMin=null,prixMax=null,limit=null,page=null) {
+    const options = this.tools.formOption(true);
+    let body = this.tools.makeBody({
+      'like' : like,
+      'user' : user,
+      'prixMin' : prixMin,
+      'prixMax' : prixMax,
+      'limit' : limit,
+      'page' : page
+    });
+    return this.http.patch(base_url_node + '/commande/all'+body,{},options);
   }
 }

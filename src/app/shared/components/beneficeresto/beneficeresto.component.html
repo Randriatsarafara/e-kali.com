@@ -1,0 +1,24 @@
+  <div class="content">
+    <div class="table-inside">
+      <div class="flex flex-col border ltLg:responsive">
+        <div class="flex items-center p-4 border-b">
+          <div class="w-4/12 font-medium text-left">Plat</div>
+          <div class="w-2/12 font-medium text-left">Prix d'achat</div>
+          <div class="w-2/12 font-medium text-left">Prix de vente</div>
+          <div class="w-2/12 font-medium text-left">Quantite</div>
+          <div class="w-2/12 font-medium text-left">Benefice</div>
+        </div>
+        <div class="flex items-center p-4 border-b" *ngFor="let item of benefice">
+          <div class="w-4/12">
+            <h6 class="flex-auto">{{item.idplatlib.designation}}</h6>
+            <p style="font-size: 10px;">{{item.idplat}}</p>
+          </div>
+          <div class="w-2/12 text-left">{{item.idplatlib.prixAchat}} Ariary</div>
+          <div class="w-2/12 text-left">{{item.idplatlib.prixVente}} Ariary</div>
+          <div class="w-2/12 text-left">{{item.quantite}}</div>
+          <div class="w-2/12 text-left">{{(item.idplatlib.prixVente*item.quantite)-(item.idplatlib.prixAchat*item.quantite)}} Ariary</div>
+        </div>
+
+      </div>
+    </div>
+  </div>

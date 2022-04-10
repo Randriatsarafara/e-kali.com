@@ -13,6 +13,13 @@ import { InscriptionComponent } from './pages/inscription/inscription.component'
 import { ContactComponent } from './pages/contact/contact.component';
 import { CommandeComponent } from './pages/commande/commande.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddplatComponent } from './pages/addplat/addplat.component';
+import { ListesplatComponent } from './pages/listesplat/listesplat.component';
+import { UpdateplatComponent } from './pages/updateplat/updateplat.component';
+import { BeneficerestaurantComponent } from './pages/beneficerestaurant/beneficerestaurant.component';
+import { CommandesrespComponent } from './pages/commandesresp/commandesresp.component';
+import { NewuserComponent } from './pages/newuser/newuser.component';
+import { ListuserComponent } from './pages/listuser/listuser.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +29,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     InscriptionComponent,
     ContactComponent,
-    CommandeComponent
+    CommandeComponent,
+    AddplatComponent,
+    ListesplatComponent,
+    UpdateplatComponent,
+    BeneficerestaurantComponent,
+    CommandesrespComponent,
+    NewuserComponent,
+    ListuserComponent
   ],
   imports: [
     BrowserModule,

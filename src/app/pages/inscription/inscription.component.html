@@ -6,7 +6,7 @@
           <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Nom </label>
           <input
             class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
-            id="email"
+            id="nom"
             type="text"
             formControlName="nom"
           />
@@ -15,7 +15,7 @@
           <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Prenom </label>
           <input
             class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
-            id="email"
+            id="prenom"
             type="text"
             formControlName="prenom"
           />
@@ -24,7 +24,7 @@
           <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Numero </label>
           <input
             class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
-            id="email"
+            id="numero"
             type="text"
             formControlName="numero"
           />
@@ -38,12 +38,12 @@
             formControlName="email"
           />
         </div>
-        <div class="mb-4 mt-6">
+        <!-- <div class="mb-4 mt-6">
           <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Type </label>
           <select formControlName="role" class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10" name="" id="">
             <option *ngFor="let typ of type" [value]="typ._id">{{typ.val}}</option>
           </select>
-        </div>
+        </div> -->
         <div class="mb-4 mt-6">
           <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Ville </label>
           <select formControlName="ville" class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10" name="" id="">
@@ -54,7 +54,7 @@
           <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Adresse </label>
           <textarea
             class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
-            id="email"
+            id="adresse"
             type="text"
             rows="3"
             style="min-height: 100px;"

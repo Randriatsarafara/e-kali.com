@@ -40,9 +40,15 @@ const matModules = [
   GoogleMapsModule
 ];
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListeplatComponent } from './components/listeplat/listeplat.component';
+import { ModifplatComponent } from './components/modifplat/modifplat.component';
+import { BeneficerestoComponent } from './components/beneficeresto/beneficeresto.component';
+import { CommanderespComponent } from './components/commanderesp/commanderesp.component';
+import { NewusersComponent } from './components/newusers/newusers.component';
+import { ListesusersComponent } from './components/listesusers/listesusers.component';
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, LoaderComponent, SidenavComponent, PlatComponent, CommandesComponent, PanierComponent, SendmailComponent, MailComponent, NewplatComponent, AllplatComponent, MessageComponent],
+  declarations: [HeaderComponent, FooterComponent, LoaderComponent, SidenavComponent, PlatComponent, CommandesComponent, PanierComponent, SendmailComponent, MailComponent, NewplatComponent, AllplatComponent, MessageComponent, ListeplatComponent, ModifplatComponent, BeneficerestoComponent, CommanderespComponent, NewusersComponent, ListesusersComponent],
   imports: [FormsModule, ReactiveFormsModule,CommonModule, RouterModule, ...matModules],
-  exports: [HeaderComponent, FooterComponent, LoaderComponent, SidenavComponent,PlatComponent,SendmailComponent,MailComponent,CommandesComponent,MessageComponent, ...matModules]
+  exports: [HeaderComponent, FooterComponent, LoaderComponent, SidenavComponent,PlatComponent,SendmailComponent,MailComponent,CommandesComponent,MessageComponent,NewplatComponent,ListeplatComponent,ModifplatComponent,BeneficerestoComponent,CommanderespComponent,NewusersComponent, ...matModules]
 })
 export class SharedModule {}
