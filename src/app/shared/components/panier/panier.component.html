@@ -5,42 +5,39 @@
     <div class="table-inside">
       <div class="flex flex-col border ltLg:responsive">
         <div class="flex items-center p-4 border-b">
-          <div class="w-6/12 font-medium text-left">Plat</div>
-          <div class="w-2/12 font-medium text-left">Restaurant</div>
+          <div class="w-4/12 font-medium text-left">Plat</div>
+          <div class="w-4/12 font-medium text-left">Restaurant</div>
           <div class="w-2/12 font-medium text-left">Prix en Ar</div>
           <div class="w-2/12 font-medium text-left">Quantite</div>
           <div class="w-1/12 font-medium text-left"></div>
         </div>
-        <div class="flex items-center p-4 border-b" *ngFor="let a of [1,2,3]">
-          <div class="w-6/12">
-            <a href="" class="flex hover:text-primary">
-              <div class="max-h-16 w-16 flex-none mr-3 border">
-                <img src="../../../assets/images/accueil.jpg" alt="img">
-              </div>
-              <h6 class="flex-auto">Tsara Tsiro</h6>
-            </a>
+        <div class="flex items-center p-4 border-b" *ngFor="let c of commande">
+          <div class="w-4/12">
+            <h6 class="flex-auto">{{c['designation']}}</h6>
+            <p style="font-size: 10px;">{{c['description'].substr(0, 30)}}...</p>
           </div>
-          <div class="w-2/12 text-left">Tsiro</div>
-          <div class="w-2/12 text-left">10000</div>
+          <div class="w-4/12 text-left">{{c['userlib'][0]["nom"]}}</div>
+          <div class="w-2/12 text-left">{{c['prixVente']}}Ar</div>
           <div class="w-2/12 text-left">
-            20
+            <input id="panier_{{c['_id']}}" style="width: 100px;height: 50px;color: black;font-family: bold;font-size: 20px;border: none;" type="number" [value]="c['quantite']">
           </div>
           <div class="w-1/12 text-left">
-            <button class="action_icon__btn" mat-icon-button>
+            <button class="action_icon__btn" (click)="removePannierById(c['_id'])" mat-icon-button>
               <mat-icon>delete</mat-icon>
             </button>
           </div>
         </div>
-        <div class="flex items-center p-4 border-b">
-          <div class="w-12/12 text-left">
-            <b>Total : <span bg-warn>5000000</span> Ariary</b>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
 
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="true" mat-raised-button color="warn" cdkFocusInitial>Commander</button>
+<mat-dialog-actions align="start">
+  <div class="flex items-center p-4 border-b">
+    <div class="w-12/12 text-left">
+      <b>Total : <span bg-warn>{{total}}</span> Ariary</b>
+    </div>
+  <button (click)="valider()" mat-button [mat-dialog-close]="true" mat-raised-button color="warn" cdkFocusInitial>Commander</button>
+</div>
 </mat-dialog-actions>

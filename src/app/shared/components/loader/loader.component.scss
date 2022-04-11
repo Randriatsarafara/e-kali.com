@@ -1,7 +1,8 @@
-.loader {
+mat-spinner {
     display: flex;
     justify-content: center;
     padding: 50px;
+
 }
 .center {
   position: fixed;
@@ -11,5 +12,5 @@
   right: 0;
   background-color: #fff;
   align-items: center;
-  z-index: 99999;
+  z-index: 10;
 }

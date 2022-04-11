@@ -1,13 +1,13 @@
-<ll-loader [show]="isLoader"></ll-loader>
+
 <div [class.example-is-mobile]="isLessThenLargeDevice">
   <mat-sidenav-container class="kl-sidenav-container">
     <mat-sidenav #sidenav [opened]="isSidenavExpand && isLessThenLargeDevice" [mode]="'over'" [fixedInViewport]="isLessThenLargeDevice">
       <app-sidenav></app-sidenav>
     </mat-sidenav>
     <mat-sidenav-content>
-      <app-header (toggleSidenav)="toggleSidenav()"></app-header>
+      <app-header (toggleSidenav)="toggleSidenav()" #fc></app-header>
       <div class="container" style="min-height: 455px;">
-        <app-plat></app-plat>
+        <app-plat [addHuhu]="fc.addHuhu"></app-plat>
       </div>
       <app-footer></app-footer>
     </mat-sidenav-content>

@@ -1,79 +1,85 @@
-<div>
-  <div class="container">
-    <div class="search pb-6">
-        <div class="border overflow-hidden sm:rounded-md p-5">
-          <div class="mb-3">
-            <div class="flex justify-between flex-wrap">
-              <h4>Recherche :</h4>
-            </div>
-            <div class="mt-3 flex">
+  <div class="search pb-6">
+    <div class="border overflow-hidden sm:rounded-md p-5">
+      <form [formGroup]="loginForm">
+        <div class="mb-3">
+          <div class="flex justify-between flex-wrap">
+            <h4>Recherche :</h4>
+          </div>
+          <div class="mt-3 flex">
+            <input
+              type="text"
+              placeholder="Tapez ici ce que vous voullez rechercher..."
+              class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md rounded-r-md py-3 px-6"
+              (input)="onLike()"
+              formControlName="like"
+            />
+          </div>
+          <div class="mt-3 flex">
+            <button (click)="advanceSearchExpanded = !advanceSearchExpanded" mat-button><mat-icon>tune</mat-icon></button>
+          </div>
+        </div>
+        <mat-expansion-panel [expanded]="advanceSearchExpanded">
+          <div class="grid grid-cols-6 gap-6 mt-4">
+            <div class="col-span-6 sm:col-span-3">
+              <div class="flex justify-between flex-wrap">
+                <p>Prix minimum :</p>
+              </div>
               <input
                 type="text"
-                placeholder="Tapez ici ce que vous voullez rechercher..."
-                class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md rounded-r-md py-3 px-6"
-                required
+                class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                placeholder="0.0"
+                (input)="onLike()"
+                formControlName="min"
               />
             </div>
-            <div class="mt-3 flex">
-              <button (click)="advanceSearchExpanded = !advanceSearchExpanded" mat-button><mat-icon>tune</mat-icon></button>
+            <div class="col-span-6 sm:col-span-3">
+              <div class="flex justify-between flex-wrap">
+                <p>Prix maximum :</p>
+              </div>
+              <input
+                type="text"
+                class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                placeholder="0.0"
+                (input)="onLike()"
+                formControlName="max"
+              />
             </div>
           </div>
-          <mat-expansion-panel [expanded]="advanceSearchExpanded">
-            <div class="grid grid-cols-6 gap-6 mt-4">
-              <div class="col-span-6 sm:col-span-3">
-                <div class="flex justify-between flex-wrap">
-                  <p>Prix minimum :</p>
-                </div>
-                <input
-                  type="text"
-                  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  placeholder="0.0"
-                />
-              </div>
-              <div class="col-span-6 sm:col-span-3">
-                <div class="flex justify-between flex-wrap">
-                  <p>Prix maximum :</p>
-                </div>
-                <input
-                  type="text"
-                  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  placeholder="0.0"
-                />
-              </div>
-            </div>
-          </mat-expansion-panel>
-        </div>
+        </mat-expansion-panel>
+      </form>
     </div>
+  </div>
 
-    <div class="ll-section-head text-center mb-5">
-      <h1 class="ll-section-head__heaidng">RECETTES</h1>
-    </div>
-    <div class="grid grid-cols-12 gap-6 xxl:gap-8">
-      <div *ngFor="let a of [1,1,1,1,1,1,1]" class="col-span-12 md:col-span-6 xl:col-span-4">
-        <mat-card class="product">
-          <img mat-card-image src="../../../assets/images/accueil.jpg" alt="" style="width: 100%; margin: 0 0 20px" />
+  <div class="ll-section-head text-center mb-5">
+    <h1 class="ll-section-head__heaidng">RECETTES</h1>
+  </div>
+  <div *ngIf="products.length<1 && !isLoader" class="col-span-12 md:col-span-6 xl:col-span-4 text-center">
+    <b>Aucun recette</b>
+  </div>
+  <app-loader [show]="isLoader"></app-loader>
+  <div class="grid grid-cols-12 gap-6 xxl:gap-8">
+  <div *ngFor="let product of products" class="col-span-12 md:col-span-6 xl:col-span-4">
+  <mat-card class="product">
+    <!-- <form (ngSubmit)="addPanier(product._id,y)"> -->
+          <img mat-card-image src="../../../assets/images/image.png" alt="image" style="width: 100%; margin: 0 0 20px" />
           <mat-card-content class="flex">
             <div class="flex-grow pl-3">
-              <h4 class="product__creator"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon><b> Tsiro</b> à Tana - Andoharanofotsy </h4>
+              <h4 class="product__creator"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon><b> {{product.userlib.nom}}</b> à {{product.userlib.adresse}} </h4>
               <h2 class="product__name">
-                <a [routerLink]="['/products', 1]">Tsara Tsiro <span class="product__price text-accent font-bold"> 10000Ar </span></a>
+                <p>{{product.designation}} <span class="product__price text-accent font-bold" style="font-size: 14px;"> {{toMoney(product.prixVente)}}Ar </span></p>
               </h2>
             </div>
           </mat-card-content>
           <mat-card-actions class="product__action flex justify-between">
             <div class="flex-1 text-center flex items-center justify-center">
-              <input [value]="a" type="number" class="text-accent p-2 px-4 w-full sm:w-1/2 rounded-sm" />
+              <input id="id_{{product._id}}" value="1" [placeholder]="y" type="number" class="text-accent p-2 px-4 w-full sm:w-1/2 rounded-sm" />
             </div>
             <div class="flex-1 text-center">
-              <a [routerLink]="['/products', 1]" mat-raised-button color="warn" class="px-4">Ajouter panier</a>
+              <a (click)="addPanier('id_'+product._id,product._id);addHuhu()" mat-raised-button color="warn" class="px-4">Ajouter panier</a>
+              <!-- <a (click)="addPanier('id_'+product._id,product._id)" mat-raised-button color="warn" class="px-4">Ajouter panier</a> -->
             </div>
           </mat-card-actions>
-        </mat-card>
-      </div>
-    </div>
+    <!-- </form> -->
+  </mat-card>
   </div>
 </div>
-
-
-
-

@@ -8,14 +8,17 @@
         <ul class="flex item-center ml-5" *ngIf="!isLessThenLargeDevice">
           <li>
             <a mat-button routerLink="/accueil" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Plats</a>
-            <a mat-button routerLink="/commande" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Commande en cours</a>
-            <a mat-button routerLink="/gerer" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Gérer les plats</a>
-            <a mat-button routerLink="/benefice" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Voir bénefice</a>
+            <a mat-button *ngIf="userType==='Restaurant'" routerLink="/commande" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Commande en cours</a>
+            <a mat-button *ngIf="userType==='Responsable'" routerLink="/admin/commande" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Commande</a>
+            <a mat-button *ngIf="userType==='Restaurant'" routerLink="/addplat" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Gérer les plats</a>
+            <a mat-button *ngIf="userType==='Responsable'" routerLink="/admin/newuser" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Paramètre</a>
+            <a mat-button *ngIf="userType==='Restaurant'" routerLink="/resto/benefice" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Voir bénefice</a>
+            <a mat-button *ngIf="userType==='Responsable'" routerLink="/admin/benefice" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Voir bénefice</a>
+            <a mat-button *ngIf="userType==='Livreur'" routerLink="/livreur/livraison" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Livraison</a>
             <a mat-button routerLink="/contact" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">Contactez e-kali</a>
           </li>
         </ul>
       </div>
-      <!-- <mat-icon (click)="openDialog()" *ngIf="isLessThenLargeDevice" matBadge="15" matBadgeColor="warn" style="cursor: pointer;">shopping_cart</mat-icon> -->
       <button
         *ngIf="isLessThenLargeDevice"
         (click)="toggleSidenav.emit()"
@@ -24,9 +27,11 @@
       >
         <mat-icon>menu</mat-icon>
       </button>
-      <div *ngIf="!isLessThenLargeDevice" class="items-center md:flex ml-auto">
-        <mat-icon (click)="openDialog()" matBadge="15" matBadgeColor="warn" style="cursor: pointer;">shopping_cart</mat-icon>
-        <a [routerLink]="['/connecter']" class="text-lg font-bold py-2 px-5">Se connecter</a>
+      <div *ngIf="!isLessThenLargeDevice" class="items-center md:flex ml-auto menu-left">
+        <mat-icon (click)="openDialog()" [matBadge]="addHuhu()" matBadgeColor="warn" style="cursor: pointer;margin-right: 10px;">shopping_cart</mat-icon>
+        <a *ngIf="!isLogged" [routerLink]="['/connecter']" class="text-lg font-bold py-2 px-5" style="cursor: pointer;">Se connecter</a>
+        <a *ngIf="!isLogged" [routerLink]="['/inscrire']" class="text-lg font-bold py-2 px-5" style="cursor: pointer;">S'inscrire</a>
+        <a *ngIf="isLogged" mat-list-item (click)="deconnecter()" class="text-lg font-bold py-2 px-5" style="cursor: pointer;">Se deconnecter</a>
       </div>
     </div>
   </div>

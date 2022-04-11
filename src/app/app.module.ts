@@ -12,10 +12,43 @@ import { LoginComponent } from './pages/login/login.component';
 import { InscriptionComponent } from './pages/inscription/inscription.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { CommandeComponent } from './pages/commande/commande.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddplatComponent } from './pages/addplat/addplat.component';
+import { ListesplatComponent } from './pages/listesplat/listesplat.component';
+import { UpdateplatComponent } from './pages/updateplat/updateplat.component';
+import { BeneficerestaurantComponent } from './pages/beneficerestaurant/beneficerestaurant.component';
+import { CommandesrespComponent } from './pages/commandesresp/commandesresp.component';
+import { NewuserComponent } from './pages/newuser/newuser.component';
+import { ListuserComponent } from './pages/listuser/listuser.component';
+import { PlatsLivreurComponent } from './pages/plats-livreur/plats-livreur.component';
 
 @NgModule({
-  declarations: [AppComponent, AccueilComponent, PlatsComponent, LoginComponent, InscriptionComponent, ContactComponent, CommandeComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, NgxSkeletonLoaderModule],
+  declarations: [
+    AppComponent,
+    AccueilComponent,
+    PlatsComponent,
+    LoginComponent,
+    InscriptionComponent,
+    ContactComponent,
+    CommandeComponent,
+    AddplatComponent,
+    ListesplatComponent,
+    UpdateplatComponent,
+    BeneficerestaurantComponent,
+    CommandesrespComponent,
+    NewuserComponent,
+    ListuserComponent,
+    PlatsLivreurComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxSkeletonLoaderModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
