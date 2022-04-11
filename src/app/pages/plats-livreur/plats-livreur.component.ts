@@ -4,11 +4,11 @@ import { takeWhile } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
-  selector: 'app-listuser',
-  templateUrl: './listuser.component.html',
-  styleUrls: ['./listuser.component.scss']
+  selector: 'app-plats-livreur',
+  templateUrl: './plats-livreur.component.html',
+  styleUrls: ['./plats-livreur.component.scss']
 })
-export class ListuserComponent implements OnInit {
+export class PlatsLivreurComponent implements OnInit {
 
   isAlive: boolean = true;
   @ViewChild('sidenav') sidenav;
@@ -35,4 +35,5 @@ export class ListuserComponent implements OnInit {
     this.sidenav.toggle();
     this.isSidenavExpand = this.sidenav.opened;
   }
+
 }

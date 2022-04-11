@@ -20,6 +20,7 @@ import { BeneficerestaurantComponent } from './pages/beneficerestaurant/benefice
 import { CommandesrespComponent } from './pages/commandesresp/commandesresp.component';
 import { NewuserComponent } from './pages/newuser/newuser.component';
 import { ListuserComponent } from './pages/listuser/listuser.component';
+import { PlatsLivreurComponent } from './pages/plats-livreur/plats-livreur.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ListuserComponent } from './pages/listuser/listuser.component';
     BeneficerestaurantComponent,
     CommandesrespComponent,
     NewuserComponent,
-    ListuserComponent
+    ListuserComponent,
+    PlatsLivreurComponent
   ],
   imports: [
     BrowserModule,

@@ -67,7 +67,7 @@
             <div class="flex-grow pl-3">
               <h4 class="product__creator"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon><b> Tsiro</b> à Tana - Andoharanofotsy </h4>
               <h2 class="product__name">
-                <a [routerLink]="['/products', 1]">{{product.designation}} <span class="product__price text-accent font-bold"> {{product.prixVente}}Ar </span></a>
+                <a [routerLink]="['/products', 1]">{{product.designation}} <span class="product__price text-accent font-bold"> {{toMoney(product.prixVente)}}Ar </span></a>
               </h2>
             </div>
           </mat-card-content>

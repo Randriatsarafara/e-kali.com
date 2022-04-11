@@ -11,6 +11,7 @@ import { ListesplatComponent } from './pages/listesplat/listesplat.component';
 import { ListuserComponent } from './pages/listuser/listuser.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NewuserComponent } from './pages/newuser/newuser.component';
+import { PlatsLivreurComponent } from './pages/plats-livreur/plats-livreur.component';
 import { PlatsComponent } from './pages/plats/plats.component';
 import { UpdateplatComponent } from './pages/updateplat/updateplat.component';
 
@@ -67,6 +68,10 @@ const routes: Routes = [
   {
     path: 'admin/listuser',
     component: ListuserComponent,
+  },
+  {
+    path: 'livreur/livraison',
+    component: PlatsLivreurComponent
   }
 ];
 

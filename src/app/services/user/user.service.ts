@@ -212,6 +212,8 @@ export class UserService {
     return this.http.post(base_url_node + '/commande/listeDetail', body,options);
   }
 
+
+  //TY
   commandeAll(like=null,user=null,prixMin=null,prixMax=null,limit=null,page=null) {
     const options = this.tools.formOption(true);
     let body = this.tools.makeBody({
@@ -224,4 +226,27 @@ export class UserService {
     });
     return this.http.patch(base_url_node + '/commande/all'+body,{},options);
   }
+
+  userAll() {
+    const options = this.tools.formOption(true);
+    return this.http.patch(base_url_node + '/user/admin/all',{},options);
+  }
+
+  formatMoney(mon){
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    });
+    return formatter.format(mon);
+  }
+
+  livraison(idcommande,status:string) {
+    const options = this.tools.formOption(true);
+    const body = {
+      status: status,
+      livreur:localStorage.getItem("id")
+    }
+    return this.http.patch(base_url_node + '/commande/update/'+idcommande,body,options);
+  }
+
 }

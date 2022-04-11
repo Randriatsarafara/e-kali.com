@@ -70,4 +70,7 @@ export class PlatComponent implements OnInit {
     this.userService.addPanier(containputiner['value'],id);
   }
 
+  toMoney(valeur:number){
+    return valeur.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$& ');
+  }
 }
