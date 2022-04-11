@@ -149,7 +149,7 @@ module.exports.create = (req, res) => {
 }
 //Valider
 module.exports.commandeEnCours = (req, res) => {
-    var perPage = req.query.limit ? parseInt(req.query.limit) : 10,
+    var perPage = req.query.limit ? parseInt(req.query.limit) : 1000,
         page = req.query.page ? Math.max(0, parseInt(req.query.page)) : 1
     const query = {}
     query['status'] = "EN ATTENTE"
@@ -170,7 +170,6 @@ module.exports.commandeEnCours = (req, res) => {
         }
         query['$or'] = orQuery
     }
-    console.log(query)
     Commande.find(query)
         .limit(perPage)
         .skip(perPage * (page - 1))
@@ -189,7 +188,7 @@ module.exports.commandeEnCours = (req, res) => {
 
 //Valider
 module.exports.listeDetailCommande = (req, res) => {
-    Detailcommande.find({idvendeur:req.body.idvendeur}).exec().then(async (details) =>{
+    Detailcommande.find({idvendeur:req.body.idvendeur,status:'LIVRER'}).exec().then(async (details) =>{
         res.status(200).json({
             success: {
                 message: "Detail du commande "+req.body.idvendeur,

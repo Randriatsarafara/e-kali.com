@@ -22,10 +22,16 @@ const platSchema = mongoose.Schema({
         ref: "User",
         required: true,
     },
+    userlib:{
+        type: JSON
+    },
+    createdAt:{
+        type: Date
+    },
     photo: String,
     status: {
         type: String,
-        match: /(ACTIF|PENDING)/,
+        match: /(ACTIF|NON ACTIF)/,
         required: true,
         default: "ACTIF"
     }

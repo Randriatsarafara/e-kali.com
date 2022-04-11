@@ -1,4 +1,5 @@
 const Plat = require("./model");
+const User = require("../user/model");
 const uploadImage = require("../../utilitaire/uploadImage");
 const { mongoose } = require("mongoose");
 
@@ -55,8 +56,9 @@ module.exports.platActif = (req, res) => {
 module.exports.platByUser = (req, res) => {
     Plat.find({ user: req.params.iduser })
         .exec()
-        .then(result => {
-            res.status(200).json(result)
+        .then(async (result) => {
+            const count = await Plat.countDocuments().exec()
+            res.status(200).json({data:result,count:count})
         })
         .catch(err => {
             res.status(500).json({
@@ -133,17 +135,23 @@ module.exports.create = (req, res) => {
             if(req.body.prixAchat<=0 || req.body.prixAchat===null || req.body.prixAchat===undefined){
                 res.status(500).json({ error: {message : "Prix achat invalide"} })
             }
-            const data = {
-                ...req.body,
-                // images,
-                createdAt: new Date()
-            }
-            const plat = new Plat({ ...data, _id: mongoose.Types.ObjectId() })
-            plat.save().then((result) => {
-                res.status(200).json(result)
-            }).catch(error => {
-                res.status(500).json({ error: {message : error.message} })
-            })
+            console.log(req.body.user)
+            User.findOne({_id:req.body.user})
+                .exec().then((results) => {
+                    const data = {
+                        ...req.body,
+                        userlib:results,
+                        createdAt: new Date()
+                    }
+                    const plat = new Plat({ ...data, _id: mongoose.Types.ObjectId() })
+                    plat.save().then((result) => {
+                        res.status(200).json(result)
+                    }).catch(error => {
+                        res.status(500).json({ error: {message : error.message} })
+                    })
+                }).catch(err => {
+                    console.log(err)
+                }) 
     //     } else {
     //         res.status(500).json({ error })
     //     }
@@ -192,4 +200,67 @@ module.exports.detailPannier = (req, res) => {
             }
         });
     }
+}
+
+
+
+//Attend test
+module.exports.update = (req, res) => {
+    // uploadImage(req, res, async (error) => {
+    //     if (req.files.length > 0) {
+            // const images = req.files.req.files;
+            // build data
+            if(req.body.designation==="" || req.body.designation===null || req.body.designation===undefined){
+                res.status(500).json({ error: {message : "Designation invalide"} })
+            }
+            if(req.body.prixVente<=0 || req.body.prixVente===null || req.body.prixVente===undefined){
+                res.status(500).json({ error: {message : "Prix vente invalide"} })
+            }
+            if(req.body.prixAchat<=0 || req.body.prixAchat===null || req.body.prixAchat===undefined){
+                res.status(500).json({ error: {message : "Prix achat invalide"} })
+            }
+            
+            // Commande.updateOne({ _id: req.params.id }, {"livreur":req.body.livreur,"livreurlib":result,"status":req.body.status}).then(result => {
+            //     res.status(200).json({ success: "Update successfull"})
+            // }).catch(err => {
+            //     res.status(500).json({ error: err.message });
+            // });
+        
+            // const plat = new Plat({ ...data, _id: mongoose.Types.ObjectId() })
+            console.log("DDDDDDDDDD")
+            const data = {
+                ...req.body,
+                createdAt: new Date()
+            }
+            console.log("id",req.params.id)
+            console.log("EEEEEEEEEEEE=",{...data})
+            Plat.updateOne({ _id: req.params.id },{...data}).then((result) => {
+                console.log("METYYYYYYYYYYYYYy",result);
+                res.status(200).json(result)
+            }).catch(error => {
+                res.status(500).json({ error: {message : error.message} })
+            })
+    //     } else {
+    //         res.status(500).json({ error })
+    //     }
+    // })
+}
+
+
+//Attend test
+module.exports.desactiver = (req, res) => {
+    Plat.updateOne({ _id: req.params.id },{"status":"NON ACTIF"}).then((result) => {
+        res.status(200).json(result)
+    }).catch(error => {
+        res.status(500).json({ error: {message : error.message} })
+    })
+}
+
+
+module.exports.activer = (req, res) => {
+    Plat.updateOne({ _id: req.params.id },{"status":"ACTIF"}).then((result) => {
+        res.status(200).json(result)
+    }).catch(error => {
+        res.status(500).json({ error: {message : error.message} })
+    })
 }
