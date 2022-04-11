@@ -249,4 +249,25 @@ export class UserService {
     return this.http.patch(base_url_node + '/commande/update/'+idcommande,body,options);
   }
 
+  updateplat(idp:string,designation:string, description:string, prixAchat:number, prixVente:number,id:string){
+    const options = this.tools.formOption();
+    let body = {
+      'designation':designation,
+      'description':description,
+      'prixAchat':prixAchat,
+      'prixVente':prixVente,
+      'user':id
+    };
+    return this.http.post(base_url_node+'/plat/update/'+idp, body,options);
+  }
+
+  activer(idp:string){
+    const options = this.tools.formOption();
+    return this.http.patch(base_url_node+'/plat/activer/'+idp, {},options);
+  }
+
+  desactiver(idp:string){
+    const options = this.tools.formOption();
+    return this.http.patch(base_url_node+'/plat/desactiver/'+idp, {},options);
+  }
 }

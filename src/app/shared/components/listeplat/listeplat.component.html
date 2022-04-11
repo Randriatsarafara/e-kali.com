@@ -51,9 +51,10 @@
         <div class="w-4/12 font-medium text-left">Description</div>
         <div class="w-2/12 font-medium text-left">Prix d'achat</div>
         <div class="w-2/12 font-medium text-left">Prix de vente</div>
-        <div class="w-1/12 font-medium text-left">Status</div>
+        <div class="w-1/12 font-medium text-center">Status</div>
         <div class="w-1/12 font-medium text-left">Modifier</div>
       </div>
+      <app-loader [show]="isLoader"></app-loader>
       <div class="flex items-center p-4 border-b" *ngFor="let plat of plats">
         <div class="w-4/12 toutplat">
           <p>{{plat.designation}}</p>
@@ -66,11 +67,15 @@
           {{plat.prixVente}} Ariary
         </div>
         <div class="w-1/12 text-left">
-            <mat-icon *ngIf="plat.status=='NON ACTIF'" style="color: rgb(4, 20, 240);" >info</mat-icon>
-            <mat-icon *ngIf="plat.status=='SUPPRIMER'" style="color: rgb(255, 4, 4);">highlight_off</mat-icon>
-            <mat-icon *ngIf="plat.status=='ACTIF'" style="color: green;">check_circle</mat-icon>
+          <b>{{plat.status}}</b>
         </div>
         <div class="w-1/12 text-left">
+          <button (click)="desactiver(plat._id)" *ngIf="plat.status=='ACTIF'" class="action_icon__btn" mat-icon-button>
+            <mat-icon  style="color: rgb(255, 4, 4);" >info</mat-icon>
+          </button>
+          <button (click)="activer(plat._id)" *ngIf="plat.status=='NON ACTIF'" class="action_icon__btn" mat-icon-button>
+            <mat-icon style="color: green;">check_circle</mat-icon>
+          </button>
           <button [routerLink]="['/listplat/update/'+plat._id]" class="action_icon__btn" mat-icon-button>
             <mat-icon>edit_note</mat-icon>
           </button>

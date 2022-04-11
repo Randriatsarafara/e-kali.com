@@ -28,12 +28,35 @@ export class ListeplatComponent implements OnInit {
       quantite : this.formBuilder.array([])
     })
     this.userService.platByUser(localStorage.getItem("id")).subscribe((res:Array<any>)=>{
-      console.log("=============",res)
-      this.plats = res;
-      // console.log(this.commande)
-      // this.count = res["count"];
-      // this.current_page = res["current_page"];
-      // this.isLoader = false;
-    },()=>this.isLoader = false);
+      this.plats = res['data'];
+      this.count = res['count'];
+      this.isLoader = false;
+    },(err)=>{
+      this.isLoader = false;
+      this.userService.openMessage(true,err.error.message);
+    }
+    );
+  }
+
+  activer(id){
+    const success = response => {
+      this.userService.openMessage(false,"OK");
+      this.router.navigate(['/listplat']);
+    };
+    const error = response => {
+      this.userService.openMessage(true,response.error.error.message);
+    };
+    this.userService.activer(id).subscribe(success, error);
+  }
+
+  desactiver(id){
+    const success = response => {
+      this.userService.openMessage(false,"OK");
+      this.router.navigate(['/listplat']);
+    };
+    const error = response => {
+      this.userService.openMessage(true,response.error.error.message);
+    };
+    this.userService.desactiver(id).subscribe(success, error);
   }
 }

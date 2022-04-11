@@ -37,15 +37,13 @@ export class ModifplatComponent implements OnInit {
 
   enregistrer(){
     const success = response => {
-      console.log(response);
       this.userService.openMessage(false,"OK");
-      this.init();
+      this.router.navigate(['/listplat']);
     };
     const error = response => {
-      console.log(response)
       this.userService.openMessage(true,response.error.error.message);
     };
-    this.userService.newplat(this.loginForm.value.designation, this.loginForm.value.description, this.loginForm.value.prixAchat, this.loginForm.value.prixVente,localStorage.getItem("id")).subscribe(success, error);
+    this.userService.updateplat(this.route.params["value"]["idplats"],this.loginForm.value.designation, this.loginForm.value.description, this.loginForm.value.prixAchat, this.loginForm.value.prixVente,localStorage.getItem("id")).subscribe(success, error);
   }
 
 }

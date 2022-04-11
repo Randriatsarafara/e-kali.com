@@ -51,13 +51,17 @@ export class PlatComponent implements OnInit {
   }
 
   onLike(){
+    this.products = [];
     this.isLoader = true;
     this.userService.recettes(this.loginForm.value.like,null,this.loginForm.value.min,this.loginForm.value.max).subscribe((res)=>{
       this.products = res["results"];
       this.count = res["count"];
       this.current_page = res["current_page"];
       this.isLoader = false;
-    },()=>this.isLoader = false);
+    },()=>{
+      this.isLoader = false
+      this.userService.openMessage(true,"ERREUR");
+    });
   }
 
   addPanier(val: any,id){

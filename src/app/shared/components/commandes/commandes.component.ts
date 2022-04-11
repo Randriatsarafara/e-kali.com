@@ -30,7 +30,13 @@ export class CommandesComponent implements OnInit {
     })
     this.userService.commandeEnCours().subscribe((res)=>{
       this.commande = res["results"];
-      console.log(this.commande)
+      for(let i=0;i<this.commande.length;i++){
+        this.userService.detailCommande(this.commande[i]._id).subscribe((ress)=>{
+          this.commande[i]['detail'] = ress["success"]['data'];
+        },(err)=>{
+          this.userService.openMessage(true,err);
+        });
+      }
       this.count = res["count"];
       this.current_page = res["current_page"];
       this.isLoader = false;

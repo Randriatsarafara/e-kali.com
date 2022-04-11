@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class NewplatComponent implements OnInit {
 
+  clickable:boolean = true;
   loginForm: FormGroup = new FormGroup({});
   constructor(private userService: UserService,public dialog: MatDialog,private router:Router, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
 
@@ -27,6 +28,7 @@ export class NewplatComponent implements OnInit {
   }
 
   enregistrer(){
+    this.clickable = false;
     const success = response => {
       console.log(response);
       // if (response['status'] == 200) {
@@ -43,10 +45,11 @@ export class NewplatComponent implements OnInit {
       // }
       this.userService.openMessage(false,"OK");
       this.init();
+      this.clickable = true;
     };
     const error = response => {
-      console.log(response)
       this.userService.openMessage(true,response.error.error.message);
+      this.clickable = true;
     };
     this.userService.newplat(this.loginForm.value.designation, this.loginForm.value.description, this.loginForm.value.prixAchat, this.loginForm.value.prixVente,localStorage.getItem("id")).subscribe(success, error);
   }

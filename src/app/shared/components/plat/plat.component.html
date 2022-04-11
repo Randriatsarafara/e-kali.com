@@ -51,23 +51,22 @@
   </div>
 
   <div class="ll-section-head text-center mb-5">
-    <!-- <app-loader [show]="isLoader"></app-loader> -->
     <h1 class="ll-section-head__heaidng">RECETTES</h1>
   </div>
-
-  <div *ngIf="products.length<1" class="col-span-12 md:col-span-6 xl:col-span-4 text-center">
+  <div *ngIf="products.length<1 && !isLoader" class="col-span-12 md:col-span-6 xl:col-span-4 text-center">
     <b>Aucun recette</b>
   </div>
+  <app-loader [show]="isLoader"></app-loader>
   <div class="grid grid-cols-12 gap-6 xxl:gap-8">
   <div *ngFor="let product of products" class="col-span-12 md:col-span-6 xl:col-span-4">
   <mat-card class="product">
     <!-- <form (ngSubmit)="addPanier(product._id,y)"> -->
-          <img mat-card-image src="../../../assets/images/accueil.jpg" alt="" style="width: 100%; margin: 0 0 20px" />
+          <img mat-card-image src="../../../assets/images/image.png" alt="image" style="width: 100%; margin: 0 0 20px" />
           <mat-card-content class="flex">
             <div class="flex-grow pl-3">
-              <h4 class="product__creator"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon><b> Tsiro</b> à Tana - Andoharanofotsy </h4>
+              <h4 class="product__creator"><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon><b> {{product.userlib.nom}}</b> à {{product.userlib.adresse}} </h4>
               <h2 class="product__name">
-                <a [routerLink]="['/products', 1]">{{product.designation}} <span class="product__price text-accent font-bold"> {{toMoney(product.prixVente)}}Ar </span></a>
+                <p>{{product.designation}} <span class="product__price text-accent font-bold" style="font-size: 14px;"> {{toMoney(product.prixVente)}}Ar </span></p>
               </h2>
             </div>
           </mat-card-content>
