@@ -75,6 +75,9 @@ module.exports.login = (req, res) => {
                         }, config.get('jwt_secret'), {
                             expiresIn: "365d"
                         })
+                        if(user.status==="SUPPRIMER"){
+                            res.status(401).json({ error: { message: "Veiller contacter le responsable e-kali pour reactiver votre compte" } })
+                        }
                         res.status(200).json({
                             success: {
                                 message: "Connection effectuée",
@@ -207,6 +210,45 @@ module.exports.sendMail = (req, res) => {
     });
 }
 
+module.exports.userAll = (req, res) => {
+    try {
+        User.aggregate([
+            {
+                $lookup:
+                {
+                    from: "types",
+                    localField: "role",
+                    foreignField: "_id",
+                    as: "rolelib"
+                },
+            },
+            {
+                $lookup:
+                {
+                    from: "villes",
+                    localField: "ville",
+                    foreignField: "_id",
+                    as: "villelib"
+                },
+            }
+        ]).exec().then((response)=>
+            {
+                res.status(200).json({
+                    success: {
+                        message: "Toute les utilisateurs",
+                        data:response
+                    }
+                });
+            }
+        );
+    } catch (err) {
+        res.status(500).json({
+            error: {
+                message: "Il y a un probleme"
+            }
+        });
+    }
+}
 
   
   

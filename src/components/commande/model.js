@@ -22,9 +22,19 @@ const commandeSchema = mongoose.Schema({
         type: JSON
     },
     adresselivraison: String,
+    livreur: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+    },
+    livreurlib: {
+        type: JSON,
+        default: {
+            nom:"---"
+        }
+    },
     status: {
         type: String,
-        match: /(EN ATTENTE|A LIVRER|LIVRER|ANNULER)/,
+        match: /(EN ATTENTE|EN COURS|LIVRER|ANNULER)/,
         required: true,
         default: "EN ATTENTE"
     },

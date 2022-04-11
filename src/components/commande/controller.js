@@ -238,3 +238,34 @@ module.exports.commandeAll = (req, res) => {
             res.status(500).json({ error: err.message })
         }) 
 }
+
+//Valider
+module.exports.listePlatAlivrer = (req, res) => {
+    Detailcommande.find().exec().then(async (details) =>{
+        res.status(200).json({
+            success: {
+                message: "Liste des livraison",
+                data: details
+            }
+        })
+    }).catch((err)=>{
+        res.status(500).json({ error: err })
+    }); 
+}
+
+//Valider
+module.exports.livrerDemande = (req, res) => {
+    User.findOne({_id:req.body.livreur}).exec().then(
+        (result)=>{
+            Commande.updateOne({ _id: req.params.id }, {"livreur":req.body.livreur,"livreurlib":result,"status":req.body.status}).then(result => {
+                res.status(200).json({ success: "Update successfull"})
+            }).catch(err => {
+                res.status(500).json({ error: err.message });
+            });
+        }
+    ).catch(
+        (err)=>{
+            res.status(500).json({ error: err.message });
+        }
+    );
+}

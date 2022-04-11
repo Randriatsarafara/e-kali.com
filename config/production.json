@@ -1,0 +1,6 @@
+{
+    "database": {
+        "uri_dev":  "mongodb+srv://kali:kali@cluster0.suixm.mongodb.net/kali?retryWrites=true&w=majority"
+    },
+    "jwt_secret": "1234"
+}
